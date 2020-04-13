@@ -1,6 +1,5 @@
 # barberdz
-
-Is a social applications for barbers and customers looking for appointments with the most talented barbers in their countriy
+is a food delivery app in Khenchela ,Algeria
 
 ## Getting Started
 
