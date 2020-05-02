@@ -1,11 +1,12 @@
 
+import 'package:barberdz/restaurantLogin.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 
-class Restaurant extends StatelessWidget {
-  final Map<String,dynamic> signInData={'phone':null,'password':null};
+class RestaurantInscription extends StatelessWidget {
+  final Map<String,dynamic> signUpData={'phone':null,'password':null};
   final _formKey=new GlobalKey<FormState>();
   final focusPhone=new FocusNode();
   final focusPassword=new FocusNode();
@@ -17,7 +18,7 @@ class Restaurant extends StatelessWidget {
         children: <Widget>[
           WavyImageRestaurantPage(),
           Padding(
-            padding: const EdgeInsets.only(top:250),
+            padding: const EdgeInsets.only(top:230),
             child: SingleChildScrollView(
               child: Column(
                 children: <Widget>[
@@ -44,14 +45,14 @@ class Restaurant extends StatelessWidget {
                                       FocusScope.of(context).requestFocus(focusPassword);
                                     },
                                     onSaved: (String value){
-                                      signInData['phone']=value;
+                                      signUpData['phone']=value;
                                     },
                                     decoration: InputDecoration(
                                       enabledBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(color: Colors.black)
                                       ),
                                       focusedBorder: UnderlineInputBorder(
-                                          borderSide: BorderSide(color: Colors.black),
+                                        borderSide: BorderSide(color: Colors.black),
                                       ),
                                       hintStyle: GoogleFonts.changa(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.black.withAlpha(150)),
                                       hintText: 'Telephone',
@@ -82,7 +83,7 @@ class Restaurant extends StatelessWidget {
                                       }
                                     },
                                     onSaved: (String value){
-                                      signInData['password']=value;
+                                      signUpData['password']=value;
                                     },
                                     decoration: InputDecoration(
                                       enabledBorder: UnderlineInputBorder(
@@ -91,7 +92,7 @@ class Restaurant extends StatelessWidget {
                                       focusedBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(color: Color.fromRGBO(0,0,0,1))
                                       ),
-                                      hintText: 'Password',
+                                      hintText: 'Mot de Passe',
                                       hintStyle: GoogleFonts.changa(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.black.withAlpha(150)),
                                       prefixIcon: Icon(Icons.lock,color: Colors.black,),
                                     ),
@@ -114,19 +115,105 @@ class Restaurant extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.height*0.05,
+                    height: MediaQuery.of(context).size.height*0.03,
                   ),
                   ClipOval(
                     child: Container(
                       child: InkWell(
                         onTap: (){
+                          Alert(
+                              context: context,
+                              title: 'Code de Verification',
+                              content: Column(
+                                children: <Widget>[
+                                  Text('Un code de verification a été envoyé a votre numero de téléphone',
+                                    style: GoogleFonts.changa(fontSize: 12,color: Colors.black),textAlign: TextAlign.center,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.fromLTRB(40, 20, 40, 20),
+                                    child: Row(
+                                      children: <Widget>[
+                                        Flexible(
+                                          child: new TextFormField(keyboardType: TextInputType.number,
+                                            style: GoogleFonts.changa(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.black),
+                                            textInputAction: TextInputAction.done,
+                                            onFieldSubmitted: (v){
+                                            },
+                                            onSaved: (String value){
+                                            },
+                                            decoration: InputDecoration(
+                                              enabledBorder: UnderlineInputBorder(
+                                                  borderSide: BorderSide(color: Colors.black)
+                                              ),
+                                              focusedBorder: UnderlineInputBorder(
+                                                borderSide: BorderSide(color: Colors.black),
+                                              ),
+                                              hintStyle: GoogleFonts.changa(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.black.withAlpha(150)),
+                                              hintText: 'Code',
+                                              prefixIcon: Icon(Icons.lock_outline,color: Colors.black,),
+                                            ),
+                                            validator: (String value){
+                                              if(value.trim().isEmpty)
+                                              {
+                                                return'Code is required';
+                                              }else{
+                                                return"";
+                                              }
+                                            },
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              buttons: [
+                                DialogButton(
+                                  onPressed: (){
+                                    //firebaseAuth.verifyPhoneNumber(phoneNumber: null, timeout: null, verificationCompleted: null, verificationFailed: null, codeSent: null, codeAutoRetrievalTimeout: null)
+                                  },
+                                  child: Text("Valider",
+                                    style: GoogleFonts.changa(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.white),
+                                  ),
+                                  color: Colors.black,
+                                )
+                              ]
+                          ).show();
                         },
                         child: new Icon(Icons.arrow_forward,size: 40,color: Colors.white,),
                       ),
-                        height: MediaQuery.of(context).size.height*0.1,
-                        width: MediaQuery.of(context).size.width*0.2,
+                      height: MediaQuery.of(context).size.height*0.1,
+                      width: MediaQuery.of(context).size.width*0.2,
                       color: Colors.black,
                     ),
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height*0.03,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 50),
+                    child: Divider(
+                      color: Colors.black,
+                    ),
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height*0.01,
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      FlatButton(
+                        onPressed: (){
+                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Restaurant()));
+                        },
+                        child:Text("Login",style: TextStyle(fontSize: 22,fontWeight: FontWeight.w400),),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30),
+                            side: BorderSide(color: Colors.black)
+                        ),
+                      )
+                    ],
                   )
                 ],
               ),
