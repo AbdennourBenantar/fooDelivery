@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 
-class RestaurantDash2 extends StatelessWidget {
+import 'bloc/bloc_navigation/navigation_bloc.dart';
+
+class RestaurantDash2 extends StatelessWidget with NavigationStates {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          Container(color: Colors.white,
-            child: Text("HOME2"),),
+          Center(
+            child: Container(color: Colors.white,
+              child: Text("HOME2",style: TextStyle(color: Colors.black)),),
+          ),
         ],
       ),
     );

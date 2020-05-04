@@ -1,7 +1,11 @@
 import 'dart:async';
 
+import 'package:barberdz/MenuItem.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rxdart/rxdart.dart';
+
+import 'bloc/bloc_navigation/navigation_bloc.dart';
 
 class SideBar extends StatefulWidget {
   @override
@@ -46,8 +50,9 @@ class _SideBarState extends State<SideBar> with SingleTickerProviderStateMixin<S
         right: isSidebarOpenedAsync.data? 0 : screenWidth-50,
         child: Row(
         children: <Widget>[
-              Expanded(
+          Expanded(
                 child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
                   color: Color(0xff262aaa),
                   child: Column(
                     children: <Widget>[
@@ -70,6 +75,48 @@ class _SideBarState extends State<SideBar> with SingleTickerProviderStateMixin<S
                         indent: 32,
                         endIndent: 32,
                       ),
+                      MenuItem(
+                        icon: Icons.home,
+                        title: "Home",
+                        onTap: (){
+                          onIconPressed();
+                          BlocProvider.of<NavigationBloc>(context).add(NavigationEvents.HomePageClickedEvent);
+                        },
+                      ),
+                      MenuItem(
+                        icon: Icons.person,
+                        title: "My acccount",
+                        onTap: (){
+                          onIconPressed();
+                          BlocProvider.of<NavigationBloc>(context).add(NavigationEvents.MyAccountClickedEvent);
+                        },
+                      ),MenuItem(
+                        icon: Icons.shopping_cart,
+                        title: "My Orders",
+                        onTap: (){
+                          onIconPressed();
+                          BlocProvider.of<NavigationBloc>(context).add(NavigationEvents.MyOrdersClickedEvent);
+                        },
+                      ),
+                      MenuItem(
+                        icon: Icons.card_giftcard,
+                        title: "WishList",
+                      ),
+                      Divider(
+                        height: 64,
+                        thickness: 0.5,
+                        color:Colors.white.withOpacity(0.3) ,
+                        indent: 32,
+                        endIndent: 32,
+                      ),
+                      MenuItem(
+                        icon: Icons.settings,
+                        title: "Settings",
+                      ),
+                      MenuItem(
+                        icon: Icons.exit_to_app,
+                        title: "Logout",
+                      ),
                     ],
                   ),
                 ),
@@ -80,16 +127,19 @@ class _SideBarState extends State<SideBar> with SingleTickerProviderStateMixin<S
               onTap: (){
                 onIconPressed();
                 },
-              child: Container(
-                width: 35,
-                height: 110,
-                color: Color(0xff262aaa),
-                alignment: Alignment.centerLeft,
-                child: AnimatedIcon(
-                  progress: _animationController.view,
-                  icon: AnimatedIcons.menu_close,
-                  color: Color(0xff1bb5fd),
-                  size: 25,
+              child: ClipPath(
+                clipper: CustomMenuClipper(),
+                child: Container(
+                  width: 35,
+                  height: 110,
+                  color: Color(0xff262aaa),
+                  alignment: Alignment.centerLeft,
+                  child: AnimatedIcon(
+                    progress: _animationController.view,
+                    icon: AnimatedIcons.menu_close,
+                    color: Color(0xff1bb5fd),
+                    size: 25,
+                  ),
                 ),
               ),
             ),
@@ -111,5 +161,30 @@ class _SideBarState extends State<SideBar> with SingleTickerProviderStateMixin<S
       isSidebarOpenedSink.add(true);
       _animationController.forward();
     }
+  }
+}
+class CustomMenuClipper extends CustomClipper<Path>
+{
+  @override
+  Path getClip(Size size) {
+    Paint paint=Paint();
+    paint.color=Colors.white;
+
+    final width=size.width;
+    final height=size.height;
+
+    Path path=Path();
+    path.moveTo(0, 0);
+    path.quadraticBezierTo(0, 8, 10, 16);
+    path.quadraticBezierTo(width-1, height/2-20, width, height/2);
+    path.quadraticBezierTo(width+1, height/2+20, 10, height-16);
+    path.quadraticBezierTo(0, height-8, 0, height);
+    path.close();
+    return path;
+  }
+  @override
+  bool shouldReclip(CustomClipper<Path> oldClipper) {
+    // TODO: implement shouldReclip
+    return true;
   }
 }
