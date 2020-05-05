@@ -1,12 +1,12 @@
 import 'package:barberdz/restaurantDash.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../Restaurantdash 2.dart';
-import '../../restaurantdash3.dart';
+import '../../RestaurantPlats.dart';
+import '../../restaurantCommandes.dart';
 
 enum NavigationEvents{
-  HomePageClickedEvent,
-  MyAccountClickedEvent,
-  MyOrdersClickedEvent
+  DashPageClickedEvent,
+  PlatsClickedEvent,
+  CommandesClickedEvent
 }
 
 abstract class NavigationStates{}
@@ -18,11 +18,11 @@ class NavigationBloc extends Bloc<NavigationEvents,NavigationStates>{
   @override
   Stream<NavigationStates> mapEventToState(NavigationEvents event) async* {
     switch(event){
-      case NavigationEvents.HomePageClickedEvent: yield RestaurantDash();
+      case NavigationEvents.DashPageClickedEvent: yield RestaurantDash();
       break;
-      case NavigationEvents.MyAccountClickedEvent: yield RestaurantDash2();
+      case NavigationEvents.PlatsClickedEvent: yield RestaurantPlats();
       break;
-      case NavigationEvents.MyOrdersClickedEvent: yield RestaurantDash3();
+      case NavigationEvents.CommandesClickedEvent: yield RestaurantCommandes();
       break;
     }
   }

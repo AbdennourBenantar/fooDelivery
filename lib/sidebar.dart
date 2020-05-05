@@ -53,19 +53,20 @@ class _SideBarState extends State<SideBar> with SingleTickerProviderStateMixin<S
           Expanded(
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 20),
-                  color: Color(0xff262aaa),
+                  color: Colors.black,
                   child: Column(
                     children: <Widget>[
                       SizedBox(height: 100,),
                       ListTile(
-                        title: Text("Abdenour",style: TextStyle(color: Colors.white,fontSize: 30,fontWeight: FontWeight.w800),),
-                        subtitle: Text("ha_benatar@esi.dz",style:TextStyle(color: Colors.white.withAlpha(50),fontSize: 20),),
+                        title: Text("Abdenour",style: TextStyle(color: Colors.white,fontSize: 25,fontWeight: FontWeight.w800),),
+                        subtitle: Text("ha_benantar@esi.dz",style:TextStyle(color: Colors.white.withAlpha(100),fontSize: 15),),
                         leading: CircleAvatar(
                           child: Icon(
                             Icons.perm_identity,
                             color: Colors.white ,
                           ),
                           radius: 40,
+                          backgroundColor: Colors.grey,
                         ),
                       ),
                       Divider(
@@ -76,31 +77,28 @@ class _SideBarState extends State<SideBar> with SingleTickerProviderStateMixin<S
                         endIndent: 32,
                       ),
                       MenuItem(
-                        icon: Icons.home,
-                        title: "Home",
+                        icon: Icons.dashboard,
+                        title: "Tableau de bord",
                         onTap: (){
                           onIconPressed();
-                          BlocProvider.of<NavigationBloc>(context).add(NavigationEvents.HomePageClickedEvent);
+                          BlocProvider.of<NavigationBloc>(context).add(NavigationEvents.DashPageClickedEvent);
                         },
                       ),
                       MenuItem(
-                        icon: Icons.person,
-                        title: "My acccount",
+                        icon: Icons.fastfood,
+                        title: "Plats",
                         onTap: (){
                           onIconPressed();
-                          BlocProvider.of<NavigationBloc>(context).add(NavigationEvents.MyAccountClickedEvent);
-                        },
-                      ),MenuItem(
-                        icon: Icons.shopping_cart,
-                        title: "My Orders",
-                        onTap: (){
-                          onIconPressed();
-                          BlocProvider.of<NavigationBloc>(context).add(NavigationEvents.MyOrdersClickedEvent);
+                          BlocProvider.of<NavigationBloc>(context).add(NavigationEvents.PlatsClickedEvent);
                         },
                       ),
                       MenuItem(
-                        icon: Icons.card_giftcard,
-                        title: "WishList",
+                        icon: Icons.add_shopping_cart,
+                        title: "Commandes",
+                        onTap: (){
+                          onIconPressed();
+                          BlocProvider.of<NavigationBloc>(context).add(NavigationEvents.CommandesClickedEvent);
+                        },
                       ),
                       Divider(
                         height: 64,
@@ -111,11 +109,11 @@ class _SideBarState extends State<SideBar> with SingleTickerProviderStateMixin<S
                       ),
                       MenuItem(
                         icon: Icons.settings,
-                        title: "Settings",
+                        title: "Parametres",
                       ),
                       MenuItem(
                         icon: Icons.exit_to_app,
-                        title: "Logout",
+                        title: "Deconnexion",
                       ),
                     ],
                   ),
@@ -131,13 +129,13 @@ class _SideBarState extends State<SideBar> with SingleTickerProviderStateMixin<S
                 clipper: CustomMenuClipper(),
                 child: Container(
                   width: 35,
-                  height: 110,
-                  color: Color(0xff262aaa),
+                  height: 120,
+                  color: Colors.black,
                   alignment: Alignment.centerLeft,
                   child: AnimatedIcon(
                     progress: _animationController.view,
                     icon: AnimatedIcons.menu_close,
-                    color: Color(0xff1bb5fd),
+                    color: Colors.white,
                     size: 25,
                   ),
                 ),
