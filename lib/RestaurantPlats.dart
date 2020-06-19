@@ -1,12 +1,16 @@
+import 'dart:math';
+
 import 'package:barberdz/option.dart';
 import 'package:barberdz/pizzas.dart';
 import 'package:barberdz/plat_card_shape.dart';
+import 'package:barberdz/plat_details.dart';
 import 'package:clay_containers/clay_containers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'bloc/bloc_navigation/navigation_bloc.dart';
 
-class RestaurantPlats extends StatelessWidget with NavigationStates {
+
+class RestaurantPlats extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final width=MediaQuery.of(context).size.width;
@@ -29,9 +33,7 @@ class RestaurantPlats extends StatelessWidget with NavigationStates {
               SizedBox(
                 height: 30,
               ),
-              _FoodOptions(selectedOptionId:1),
-              SizedBox(height:30),
-              _ItemsWidget(items:pizzas,screenWidth: width,screenHeight: height,)
+              _FoodOptionAndItems(selectedOptionId:1,screenHeight: height,screenWidth: width,items: pizzas,)
             ],
           ),
         ],
@@ -40,83 +42,101 @@ class RestaurantPlats extends StatelessWidget with NavigationStates {
   }
 }
 
-class _ItemsWidget extends StatelessWidget{
-  final List<Plat> items;
+class _FoodOptionAndItems extends StatefulWidget {
+  final int selectedOptionId;
   final double screenWidth,screenHeight;
+  final List<Plat> items;
 
-  const _ItemsWidget({Key key, this.items,this.screenWidth,this.screenHeight}) : super(key: key);
+  const _FoodOptionAndItems({Key key, this.selectedOptionId, this.screenWidth, this.screenHeight, this.items}) : super(key: key);
+  @override
+  __FoodOptionAndItemsState createState() => __FoodOptionAndItemsState();
+}
+
+class __FoodOptionAndItemsState extends State<_FoodOptionAndItems> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: screenHeight*0.42,
-      child: PageView.builder(
-          itemCount: pizzas.length,
-          controller: PageController(viewportFraction: 0.72),
-          itemBuilder: (context,index){
-              return Container(
-                margin: const EdgeInsets.symmetric(horizontal: 10),
-                child: Stack(
-                children: <Widget>[
-                  Material(
-                    elevation: 10,
-                    shape:  PlatCardShape(screenWidth*0.65,screenHeight*0.38),
-                    color: Colors.white,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(32.0),
-                    child: Align(
-                      child: Image.asset(items[index].imagePath),
-                    alignment: Alignment(0, -0.1),),
-                  ),
-                  Positioned(
-                    bottom: 50,
-                    left: 32,
-                    right: 32,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+    bool isSelected;
+    Column(
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 50),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              for (int index=0;index<options.length;index++)
+                InkWell(
+                  child: _OptionWidget(option: options[index],isSelected:options[index].id==widget.selectedOptionId),
+                  onTap: (){
+                  },
+                ),
+            ],
+          ),
+        ),
+        SizedBox(height:40),
+      ],
+    );
+    switch(widget.selectedOptionId){
+      case 1:{
+        return SizedBox(
+          height: widget.screenHeight*0.42,
+          child: PageView.builder(
+              itemCount: pizzas.length,
+              controller: PageController(viewportFraction: 0.72),
+              itemBuilder: (context,index){
+                return Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 10),
+                  child: InkWell(
+                    onTap: (){Navigator.push(context,PageRouteBuilder(
+                        transitionDuration: const Duration(milliseconds: 350),
+                        pageBuilder: (context,_,__)=>PlatDetails(plat:widget.items[index])
+                    ));},
+                    child: Stack(
                       children: <Widget>[
-                        Text(items[index].title,style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w800
-                        ),),
-                        Text(items[index].description,style:  TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w300
-                        ),),
+                        Hero(
+                          tag: "background-${widget.items[index].title}",
+                          child: Material(
+                            elevation: 10,
+                            shape:  PlatCardShape(widget.screenWidth*0.65,widget.screenHeight*0.38),
+                            color: Colors.white,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(32,32,32,60),
+                          child: Align(
+                            child: Image.asset(widget.items[index].imagePath,height: 140,width: 140,),
+                            alignment: Alignment(0, 0),),
+                        ),
+                        Positioned(
+                          bottom: 40,
+                          left: 32,
+                          right: 32,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(widget.items[index].title,style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w800
+                              ),),
+                              Text(widget.items[index].description,style:  TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w300
+                              ),),
+                            ],
+                          ),
+                        ),
+
                       ],
                     ),
                   ),
-
-                ],
-          ),
-              );
-      }),
-    );
+                );
+              }),
+        );
+      }
+      case 2: return Text('2');
+      case 3: return Text('3');
   }
-
-}
-
-class _FoodOptions extends StatelessWidget{
-
-  final int selectedOptionId;
-
-
-  const _FoodOptions({Key key, this.selectedOptionId}) : super(key: key);@override
-  Widget build(BuildContext context) {
-    bool isSelected;
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 50),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-           for (int index=0;index<options.length;index++)
-             _OptionWidget(option: options[index],isSelected:options[index].id==selectedOptionId),
-        ],
-      ),
-    );
-  }
-}
+}}
 
 class _OptionWidget extends StatelessWidget{
 
@@ -144,6 +164,7 @@ class _OptionWidget extends StatelessWidget{
     );
   }
 }
+
 class _Title extends StatelessWidget {
   final String text;
 

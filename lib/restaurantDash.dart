@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 
 import 'bloc/bloc_navigation/navigation_bloc.dart';
 
-class RestaurantDash extends StatelessWidget with NavigationStates {
+class RestaurantDash extends StatefulWidget with NavigationStates {
+  @override
+  _RestaurantDashState createState() => _RestaurantDashState();
+}
+
+class _RestaurantDashState extends State<RestaurantDash> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
