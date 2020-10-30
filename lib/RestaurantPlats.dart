@@ -7,14 +7,24 @@ import 'package:barberdz/plat_details.dart';
 import 'package:clay_containers/clay_containers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'bloc/bloc_navigation/navigation_bloc.dart';
 
 
-class RestaurantPlats extends StatelessWidget {
+class RestaurantPlats extends StatefulWidget with NavigationStates {
+  @override
+  _RestaurantPlatsState createState() => _RestaurantPlatsState();
+}
+
+class _RestaurantPlatsState extends State<RestaurantPlats> {
+  int selectedOption=1;
   @override
   Widget build(BuildContext context) {
+
     final width=MediaQuery.of(context).size.width;
     final height=MediaQuery.of(context).size.height;
+    var index=0;
     return Scaffold(
       body: Stack(
         children: <Widget>[
@@ -33,7 +43,30 @@ class RestaurantPlats extends StatelessWidget {
               SizedBox(
                 height: 30,
               ),
-              _FoodOptionAndItems(selectedOptionId:1,screenHeight: height,screenWidth: width,items: pizzas,)
+              _FoodOptionAndItems(selectedOptionId:selectedOption,screenHeight: height,screenWidth: width,items: selectedOption==1?
+                pizzas:selectedOption==2?sands:assiette
+                ,),
+              SizedBox(
+                height: MediaQuery.of(context).size.height*0.1,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 50),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    for (int index=0;index<options.length;index++)
+                      InkWell(
+                        child: _OptionWidget(option: options[selectedOption-1],isSelected:options[index].id==selectedOption,pathNum: index,),
+                        onTap: (){
+                          setState(() {
+                            selectedOption=options[index].id;
+                          });
+                        },
+                      ),
+                  ],
+                ),
+              )
+
             ],
           ),
         ],
@@ -57,31 +90,105 @@ class __FoodOptionAndItemsState extends State<_FoodOptionAndItems> {
   @override
   Widget build(BuildContext context) {
     bool isSelected;
-    Column(
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 50),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              for (int index=0;index<options.length;index++)
-                InkWell(
-                  child: _OptionWidget(option: options[index],isSelected:options[index].id==widget.selectedOptionId),
-                  onTap: (){
-                  },
-                ),
-            ],
-          ),
-        ),
-        SizedBox(height:40),
-      ],
-    );
     switch(widget.selectedOptionId){
       case 1:{
         return SizedBox(
           height: widget.screenHeight*0.42,
           child: PageView.builder(
               itemCount: pizzas.length,
+              controller: PageController(viewportFraction: 0.72),
+              itemBuilder: (context,index){
+                return Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 10),
+                  child: InkWell(
+                    onTap: (){Navigator.push(context,PageRouteBuilder(
+                        transitionDuration: const Duration(milliseconds: 350),
+                        pageBuilder: (context,_,__)=>PlatDetails(plat:widget.items[index])
+                    ));},
+                    child: Stack(
+                      children: <Widget>[
+                        Hero(
+                          tag: "background-${widget.items[index].title}",
+                          child: Material(
+                            elevation: 10,
+                            shape:  PlatCardShape(widget.screenWidth*0.65,widget.screenHeight*0.38),
+                            color: Colors.white,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(32,32,32,60),
+                          child: Align(
+                            child: IconButton(
+                              icon:Icon(Icons.close),
+                              iconSize: 25,
+                              color: Colors.black.withOpacity(0.8),
+                              onPressed: (){
+                                Alert(
+                                  context: context,
+                                  title: 'Confirmation de la suppression',
+                                  content: Column(
+                                    children: <Widget>[
+                                      Text('Voulez-vous vraiment supprimer ce plat ? vos clients ne peuvent plus le commander ',
+                                        style: GoogleFonts.changa(fontSize: 12,color: Colors.black),textAlign: TextAlign.center,
+                                      ),
+                                    ],
+                                  ),
+                                  buttons:[
+                                    DialogButton(
+                                      onPressed: (){
+                                        pizzas.remove(widget.items[index]);
+                                      },
+                                      child: Center(
+                                        child: Text("Confirmer",
+                                          style: GoogleFonts.changa(fontSize: 22,fontWeight: FontWeight.bold,color: Colors.white),
+                                        ),
+                                      ),
+                                      color: Colors.black,
+                                    )
+                                  ]
+                                ).show();
+                              },
+                            ),
+                            alignment: Alignment(1.3, -1.2),),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(32,32,32,60),
+                          child: Align(
+                            child: Image.asset(widget.items[index].imagePath,height: 140,width: 140,),
+                            alignment: Alignment(0, 0),),
+                        ),
+                        Positioned(
+                          bottom: 40,
+                          left: 32,
+                          right: 32,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(widget.items[index].title,style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w800
+                              ),),
+                              Text(widget.items[index].description,style:  TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w300
+                              ),),
+
+                            ],
+                          ),
+                        ),
+
+                      ],
+                    ),
+                  ),
+                );
+              }),
+        );
+      }
+      case 2:{
+        return SizedBox(
+          height: widget.screenHeight*0.42,
+          child: PageView.builder(
+              itemCount: sands.length,
               controller: PageController(viewportFraction: 0.72),
               itemBuilder: (context,index){
                 return Container(
@@ -133,18 +240,85 @@ class __FoodOptionAndItemsState extends State<_FoodOptionAndItems> {
               }),
         );
       }
-      case 2: return Text('2');
-      case 3: return Text('3');
-  }
+      case 3:{
+        return SizedBox(
+          height: widget.screenHeight*0.42,
+          child: PageView.builder(
+              itemCount: assiette.length,
+              controller: PageController(viewportFraction: 0.72),
+              itemBuilder: (context,index){
+                return Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 10),
+                  child: InkWell(
+                    onTap: (){Navigator.push(context,PageRouteBuilder(
+                        transitionDuration: const Duration(milliseconds: 350),
+                        pageBuilder: (context,_,__)=>PlatDetails(plat:widget.items[index])
+                    ));},
+                    child: Stack(
+                      children: <Widget>[
+                        Hero(
+                          tag: "background-${widget.items[index].title}",
+                          child: Material(
+                            elevation: 10,
+                            shape:  PlatCardShape(widget.screenWidth*0.65,widget.screenHeight*0.38),
+                            color: Colors.white,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(32,32,32,60),
+                          child: Align(
+                            child: Image.asset(widget.items[index].imagePath,height: 140,width: 140,),
+                            alignment: Alignment(0, 0),),
+                        ),
+                        Positioned(
+                          bottom: 40,
+                          left: 32,
+                          right: 32,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(widget.items[index].title,style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w800
+                              ),),
+                              Text(widget.items[index].description,style:  TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w300
+                              ),),
+                            ],
+                          ),
+                        ),
+
+                      ],
+                    ),
+                  ),
+                );
+              }),
+        );
+      }
+
+    }
 }}
 
 class _OptionWidget extends StatelessWidget{
 
   final Option option;
   final bool isSelected;
-  const _OptionWidget({Key key,@required this.option,this.isSelected=false}) : super(key: key);
+  final int pathNum;
+  const _OptionWidget({Key key,@required this.option,this.isSelected=false,this.pathNum}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    var path;
+    if(pathNum==0)
+      {
+        path=options[0].imagePath;
+      }else {
+      if(pathNum==1){
+        path=options[1].imagePath;
+      }else{
+        path=options[2].imagePath;
+      }
+    }
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8),
       child: Material(
@@ -152,13 +326,13 @@ class _OptionWidget extends StatelessWidget{
         borderRadius: BorderRadius.circular(8),
         child: Container(
           padding: const EdgeInsets.all(8),
-          width: 60,
-          height: 60,
+          width: isSelected?MediaQuery.of(context).size.width*0.16:MediaQuery.of(context).size.width*0.15,
+          height: isSelected?MediaQuery.of(context).size.height*0.08:MediaQuery.of(context).size.height*0.07,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
             color: isSelected ?Colors.black:Colors.white,
           ),
-          child: Image.asset(option.imagePath,color: isSelected?Colors.white:Colors.black,),
+          child: Image.asset(path,color: isSelected?Colors.white:Colors.black,)
         ),
       ),
     );
@@ -216,24 +390,29 @@ class _AppBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
-          ClayContainer(
-            height: 50,
-            width: 50,
-            depth: 20,
-            parentColor: Colors.black,
-            borderRadius: 25,
-            curveType: CurveType.concave,
-            child: Container(
-              decoration: BoxDecoration(
-                border: Border.all(color: const Color(0x22647082),width: 2),
-                borderRadius: BorderRadius.circular(25),
-              ),
-              child: Icon(
-                Icons.shopping_cart,
-                color: const Color(0xff647082),
-                size: 25,
+          InkWell(
+            child: ClayContainer(
+              height: 50,
+              width: 50,
+              depth: 20,
+              parentColor: Colors.black,
+              borderRadius: 25,
+              curveType: CurveType.concave,
+              child: Container(
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.white70,width:2),
+                  borderRadius: BorderRadius.circular(25),
+                ),
+                child: Icon(
+                  Icons.shopping_cart,
+                  color: Colors.black87,
+                  size: 25,
+                ),
               ),
             ),
+            onTap: ()=>{
+
+            },
           ),
         ],
       ),

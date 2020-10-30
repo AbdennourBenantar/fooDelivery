@@ -20,7 +20,7 @@ class NavigationBloc extends Bloc<NavigationEvents,NavigationStates>{
     switch(event){
       case NavigationEvents.DashPageClickedEvent: yield RestaurantDash();
       break;
-      case NavigationEvents.PlatsClickedEvent: yield RestaurantPlats();
+      case NavigationEvents.PlatsClickedEvent:yield RestaurantPlats();
       break;
       case NavigationEvents.CommandesClickedEvent: yield RestaurantCommandes();
       break;
