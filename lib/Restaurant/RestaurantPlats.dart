@@ -1,15 +1,15 @@
 import 'dart:math';
 
-import 'package:barberdz/option.dart';
+import 'package:barberdz/Restaurant/option.dart';
 import 'package:barberdz/pizzas.dart';
-import 'package:barberdz/plat_card_shape.dart';
-import 'package:barberdz/plat_details.dart';
+import 'package:barberdz/Restaurant/plat_card_shape.dart';
+import 'package:barberdz/Restaurant/plat_details.dart';
 import 'package:clay_containers/clay_containers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-import 'bloc/bloc_navigation/navigation_bloc.dart';
+import '../bloc/bloc_navigation/navigation_bloc.dart';
 
 
 class RestaurantPlats extends StatefulWidget with NavigationStates {
@@ -28,18 +28,17 @@ class _RestaurantPlatsState extends State<RestaurantPlats> {
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          _Background(
-            width: width*0.4,
+          Background(
+            width: width*0.52,
             height: height*0.8,
+            color: Colors.orange.withOpacity(0.8),
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              SizedBox(height: 50,),
-              _AppBar(),
-              SizedBox(height: 30,),
-              _Title(text: 'Nos Plats',),
+              SizedBox(height: 130,),
+              Titlee(text: 'Nos Plats',),
               SizedBox(
                 height: 30,
               ),
@@ -89,7 +88,6 @@ class __FoodOptionAndItemsState extends State<_FoodOptionAndItems> {
 
   @override
   Widget build(BuildContext context) {
-    bool isSelected;
     switch(widget.selectedOptionId){
       case 1:{
         return SizedBox(
@@ -118,42 +116,6 @@ class __FoodOptionAndItemsState extends State<_FoodOptionAndItems> {
                         Padding(
                           padding: const EdgeInsets.fromLTRB(32,32,32,60),
                           child: Align(
-                            child: IconButton(
-                              icon:Icon(Icons.close),
-                              iconSize: 25,
-                              color: Colors.black.withOpacity(0.8),
-                              onPressed: (){
-                                Alert(
-                                  context: context,
-                                  title: 'Confirmation de la suppression',
-                                  content: Column(
-                                    children: <Widget>[
-                                      Text('Voulez-vous vraiment supprimer ce plat ? vos clients ne peuvent plus le commander ',
-                                        style: GoogleFonts.changa(fontSize: 12,color: Colors.black),textAlign: TextAlign.center,
-                                      ),
-                                    ],
-                                  ),
-                                  buttons:[
-                                    DialogButton(
-                                      onPressed: (){
-                                        pizzas.remove(widget.items[index]);
-                                      },
-                                      child: Center(
-                                        child: Text("Confirmer",
-                                          style: GoogleFonts.changa(fontSize: 22,fontWeight: FontWeight.bold,color: Colors.white),
-                                        ),
-                                      ),
-                                      color: Colors.black,
-                                    )
-                                  ]
-                                ).show();
-                              },
-                            ),
-                            alignment: Alignment(1.3, -1.2),),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(32,32,32,60),
-                          child: Align(
                             child: Image.asset(widget.items[index].imagePath,height: 140,width: 140,),
                             alignment: Alignment(0, 0),),
                         ),
@@ -176,7 +138,46 @@ class __FoodOptionAndItemsState extends State<_FoodOptionAndItems> {
                             ],
                           ),
                         ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(32,32,32,60),
+                          child: Align(
+                            child: IconButton(
+                              icon:Icon(Icons.close),
+                              iconSize: 25,
+                              color: Colors.black.withOpacity(0.8),
+                              onPressed: (){
+                                Alert(
+                                    context: context,
+                                    title: 'Confirmation de la suppression',
+                                    content: Column(
+                                      children: <Widget>[
+                                        Text('Voulez-vous vraiment supprimer ce plat ? vos clients ne peuvent plus le commander ',
+                                          style: GoogleFonts.changa(fontSize: 12,color: Colors.black),textAlign: TextAlign.center,
+                                        ),
+                                      ],
+                                    ),
+                                    buttons:[
+                                      DialogButton(
+                                        onPressed: (){
+                                          setState(() {
+                                            widget.items.remove(widget.items[index]);
+                                            Navigator.pop(context);
+                                          });
 
+                                        },
+                                        child: Center(
+                                          child: Text("Confirmer",
+                                            style: GoogleFonts.changa(fontSize: 22,fontWeight: FontWeight.bold,color: Colors.white),
+                                          ),
+                                        ),
+                                        color: Colors.black,
+                                      )
+                                    ]
+                                ).show();
+                              },
+                            ),
+                            alignment: Alignment(1.3, -1.2),),
+                        ),
                       ],
                     ),
                   ),
@@ -231,6 +232,46 @@ class __FoodOptionAndItemsState extends State<_FoodOptionAndItems> {
                               ),),
                             ],
                           ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(32,32,32,60),
+                          child: Align(
+                            child: IconButton(
+                              icon:Icon(Icons.close),
+                              iconSize: 25,
+                              color: Colors.black.withOpacity(0.8),
+                              onPressed: (){
+                                Alert(
+                                    context: context,
+                                    title: 'Confirmation de la suppression',
+                                    content: Column(
+                                      children: <Widget>[
+                                        Text('Voulez-vous vraiment supprimer ce plat ? vos clients ne peuvent plus le commander ',
+                                          style: GoogleFonts.changa(fontSize: 12,color: Colors.black),textAlign: TextAlign.center,
+                                        ),
+                                      ],
+                                    ),
+                                    buttons:[
+                                      DialogButton(
+                                        onPressed: (){
+                                          setState(() {
+                                            widget.items.remove(widget.items[index]);
+                                            Navigator.pop(context);
+                                          });
+
+                                        },
+                                        child: Center(
+                                          child: Text("Confirmer",
+                                            style: GoogleFonts.changa(fontSize: 22,fontWeight: FontWeight.bold,color: Colors.white),
+                                          ),
+                                        ),
+                                        color: Colors.black,
+                                      )
+                                    ]
+                                ).show();
+                              },
+                            ),
+                            alignment: Alignment(1.3, -1.2),),
                         ),
 
                       ],
@@ -288,6 +329,46 @@ class __FoodOptionAndItemsState extends State<_FoodOptionAndItems> {
                             ],
                           ),
                         ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(32,32,32,60),
+                          child: Align(
+                            child: IconButton(
+                              icon:Icon(Icons.close),
+                              iconSize: 25,
+                              color: Colors.black.withOpacity(0.8),
+                              onPressed: (){
+                                Alert(
+                                    context: context,
+                                    title: 'Confirmation de la suppression',
+                                    content: Column(
+                                      children: <Widget>[
+                                        Text('Voulez-vous vraiment supprimer ce plat ? vos clients ne peuvent plus le commander ',
+                                          style: GoogleFonts.changa(fontSize: 12,color: Colors.black),textAlign: TextAlign.center,
+                                        ),
+                                      ],
+                                    ),
+                                    buttons:[
+                                      DialogButton(
+                                        onPressed: (){
+                                          setState(() {
+                                            widget.items.remove(widget.items[index]);
+                                            Navigator.pop(context);
+                                          });
+
+                                        },
+                                        child: Center(
+                                          child: Text("Confirmer",
+                                            style: GoogleFonts.changa(fontSize: 22,fontWeight: FontWeight.bold,color: Colors.white),
+                                          ),
+                                        ),
+                                        color: Colors.black,
+                                      )
+                                    ]
+                                ).show();
+                              },
+                            ),
+                            alignment: Alignment(1.3, -1.2),),
+                        ),
 
                       ],
                     ),
@@ -339,10 +420,10 @@ class _OptionWidget extends StatelessWidget{
   }
 }
 
-class _Title extends StatelessWidget {
+class Titlee extends StatelessWidget {
   final String text;
 
-  const _Title({Key key, this.text}) : super(key: key);
+  const Titlee({Key key, this.text}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final words=text.split(' ');
@@ -382,48 +463,12 @@ class _Title extends StatelessWidget {
   }
 }
 
-class _AppBar extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: <Widget>[
-          InkWell(
-            child: ClayContainer(
-              height: 50,
-              width: 50,
-              depth: 20,
-              parentColor: Colors.black,
-              borderRadius: 25,
-              curveType: CurveType.concave,
-              child: Container(
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.white70,width:2),
-                  borderRadius: BorderRadius.circular(25),
-                ),
-                child: Icon(
-                  Icons.shopping_cart,
-                  color: Colors.black87,
-                  size: 25,
-                ),
-              ),
-            ),
-            onTap: ()=>{
 
-            },
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _Background extends StatelessWidget {
+class Background extends StatelessWidget {
   final double width,height;
+  final Color color;
 
-  const _Background({Key key, this.width, this.height}) : super(key: key);
+  const Background({Key key, this.width, this.height,this.color}) : super(key: key);
   @override
   Widget build(BuildContext context) {
    return Positioned(
@@ -432,8 +477,8 @@ class _Background extends StatelessWidget {
      top: 0,
      height: height,
      child: ClipRRect(
-       child: Container(color: Colors.black.withOpacity(0.92),),
-       borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20)),
+       child: Container(color: color,),
+       borderRadius: BorderRadius.only(bottomLeft: Radius.circular(40),bottomRight: width==MediaQuery.of(context).size.width?Radius.circular(40):Radius.circular(0)),
      ),
    );
   }

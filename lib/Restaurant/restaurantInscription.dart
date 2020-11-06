@@ -1,14 +1,12 @@
 
-import 'package:barberdz/restaurantDash.dart';
-import 'package:barberdz/restaurantInscription.dart';
-import 'package:barberdz/sidebar_layout.dart';
+import 'package:barberdz/Restaurant/restaurantLogin.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 
-class Restaurant extends StatelessWidget {
-  final Map<String,dynamic> signInData={'phone':null,'password':null};
+class RestaurantInscription extends StatelessWidget {
+  final Map<String,dynamic> signUpData={'phone':null,'password':null};
   final _formKey=new GlobalKey<FormState>();
   final focusPhone=new FocusNode();
   final focusPassword=new FocusNode();
@@ -25,7 +23,7 @@ class Restaurant extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   Text("Restaurant",style: GoogleFonts.changa(fontSize: 55,fontWeight: FontWeight.bold),),
-                  Text("Login",style: TextStyle(fontSize: 25,fontWeight: FontWeight.w100),),
+                  Text("Inscription",style: TextStyle(fontSize: 25,fontWeight: FontWeight.w100),),
                   SizedBox(
                     height: MediaQuery.of(context).size.height*0.05,
                   ),
@@ -47,14 +45,14 @@ class Restaurant extends StatelessWidget {
                                       FocusScope.of(context).requestFocus(focusPassword);
                                     },
                                     onSaved: (String value){
-                                      signInData['phone']=value;
+                                      signUpData['phone']=value;
                                     },
                                     decoration: InputDecoration(
                                       enabledBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(color: Colors.black)
                                       ),
                                       focusedBorder: UnderlineInputBorder(
-                                          borderSide: BorderSide(color: Colors.black),
+                                        borderSide: BorderSide(color: Colors.black),
                                       ),
                                       hintStyle: GoogleFonts.changa(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.black.withAlpha(150)),
                                       hintText: 'Telephone',
@@ -85,7 +83,7 @@ class Restaurant extends StatelessWidget {
                                       }
                                     },
                                     onSaved: (String value){
-                                      signInData['password']=value;
+                                      signUpData['password']=value;
                                     },
                                     decoration: InputDecoration(
                                       enabledBorder: UnderlineInputBorder(
@@ -124,69 +122,68 @@ class Restaurant extends StatelessWidget {
                       child: InkWell(
                         onTap: (){
                           Alert(
-                            context: context,
-                            title: 'Code de Verification',
-                            content: Column(
-                              children: <Widget>[
-                                Text('Un code de verification a été envoyé a votre numero de téléphone',
-                                  style: GoogleFonts.changa(fontSize: 12,color: Colors.black),textAlign: TextAlign.center,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.fromLTRB(40, 20, 40, 20),
-                                  child: Row(
-                                    children: <Widget>[
-                                      Flexible(
-                                        child: new TextFormField(keyboardType: TextInputType.number,
-                                          style: GoogleFonts.changa(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.black),
-                                          textInputAction: TextInputAction.done,
-                                          onFieldSubmitted: (v){
-                                          },
-                                          onSaved: (String value){
-                                          },
-                                          decoration: InputDecoration(
-                                            enabledBorder: UnderlineInputBorder(
-                                                borderSide: BorderSide(color: Colors.black)
-                                            ),
-                                            focusedBorder: UnderlineInputBorder(
-                                              borderSide: BorderSide(color: Colors.black),
-                                            ),
-                                            hintStyle: GoogleFonts.changa(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.black.withAlpha(150)),
-                                            hintText: 'Code',
-                                            prefixIcon: Icon(Icons.lock_outline,color: Colors.black,),
-                                          ),
-                                          validator: (String value){
-                                            if(value.trim().isEmpty)
-                                            {
-                                              return'Code is required';
-                                            }else{
-                                              return"";
-                                            }
-                                          },
-                                        ),
-                                      ),
-                                    ],
+                              context: context,
+                              title: 'Code de Verification',
+                              content: Column(
+                                children: <Widget>[
+                                  Text('Un code de verification a été envoyé a votre numero de téléphone',
+                                    style: GoogleFonts.changa(fontSize: 12,color: Colors.black),textAlign: TextAlign.center,
                                   ),
-                                ),
-                              ],
-                            ),
-                            buttons: [
-                              DialogButton(
-                                onPressed: (){
-                                  //firebaseAuth.verifyPhoneNumber(phoneNumber: null, timeout: null, verificationCompleted: null, verificationFailed: null, codeSent: null, codeAutoRetrievalTimeout: null)
-                                  Navigator.push(context, new MaterialPageRoute(builder: (context)=>SidebarLayout()));
-                                },
-                                child: Text("Valider",
-                                  style: GoogleFonts.changa(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.white),
-                                ),
-                                color: Colors.black,
-                              )
-                            ]
+                                  Padding(
+                                    padding: const EdgeInsets.fromLTRB(40, 20, 40, 20),
+                                    child: Row(
+                                      children: <Widget>[
+                                        Flexible(
+                                          child: new TextFormField(keyboardType: TextInputType.number,
+                                            style: GoogleFonts.changa(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.black),
+                                            textInputAction: TextInputAction.done,
+                                            onFieldSubmitted: (v){
+                                            },
+                                            onSaved: (String value){
+                                            },
+                                            decoration: InputDecoration(
+                                              enabledBorder: UnderlineInputBorder(
+                                                  borderSide: BorderSide(color: Colors.black)
+                                              ),
+                                              focusedBorder: UnderlineInputBorder(
+                                                borderSide: BorderSide(color: Colors.black),
+                                              ),
+                                              hintStyle: GoogleFonts.changa(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.black.withAlpha(150)),
+                                              hintText: 'Code',
+                                              prefixIcon: Icon(Icons.lock_outline,color: Colors.black,),
+                                            ),
+                                            validator: (String value){
+                                              if(value.trim().isEmpty)
+                                              {
+                                                return'Code is required';
+                                              }else{
+                                                return"";
+                                              }
+                                            },
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              buttons: [
+                                DialogButton(
+                                  onPressed: (){
+                                    //firebaseAuth.verifyPhoneNumber(phoneNumber: null, timeout: null, verificationCompleted: null, verificationFailed: null, codeSent: null, codeAutoRetrievalTimeout: null)
+                                  },
+                                  child: Text("Valider",
+                                    style: GoogleFonts.changa(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.white),
+                                  ),
+                                  color: Colors.black,
+                                )
+                              ]
                           ).show();
                         },
                         child: new Icon(Icons.arrow_forward,size: 40,color: Colors.white,),
                       ),
-                        height: MediaQuery.of(context).size.height*0.1,
-                        width: MediaQuery.of(context).size.width*0.2,
+                      height: MediaQuery.of(context).size.height*0.1,
+                      width: MediaQuery.of(context).size.width*0.2,
                       color: Colors.black,
                     ),
                   ),
@@ -208,12 +205,12 @@ class Restaurant extends StatelessWidget {
                     children: <Widget>[
                       FlatButton(
                         onPressed: (){
-                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>RestaurantInscription()));
+                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Restaurant()));
                         },
-                        child:Text("Nouveau compte",style: TextStyle(fontSize: 22,fontWeight: FontWeight.w400),),
+                        child:Text("Login",style: TextStyle(fontSize: 22,fontWeight: FontWeight.w400),),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
-                          side: BorderSide(color: Colors.black)
+                            borderRadius: BorderRadius.circular(30),
+                            side: BorderSide(color: Colors.black)
                         ),
                       )
                     ],

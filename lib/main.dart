@@ -1,4 +1,5 @@
-import 'package:barberdz/restaurantLogin.dart';
+import 'package:barberdz/Client/clientLogin.dart';
+import 'package:barberdz/Restaurant/restaurantLogin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -76,14 +77,17 @@ class _MyHomePageState extends State<MyHomePage> {
                           child:
                           InkWell(
                             child: Image.asset('assets/buyer.jpg'),
-                            onTap: (){},
+                            onTap: (){
+                              Navigator.pushReplacement(context, new MaterialPageRoute(builder: (context)=>Client()));
+
+                            },
                           ),
                             height: MediaQuery.of(context).size.height*0.15,
                             width: MediaQuery.of(context).size.width*0.3
                         ),
                       ),
                       SizedBox(height: 10,),
-                      Text("مشتري",style: GoogleFonts.jomhuria(fontSize: 35,fontWeight: FontWeight.bold),),
+                      Text("زبون",style: GoogleFonts.jomhuria(fontSize: 35,fontWeight: FontWeight.bold),),
                       Text("Client",style: GoogleFonts.changa(fontSize: 25,fontWeight: FontWeight.bold),)
                     ],
                   ),

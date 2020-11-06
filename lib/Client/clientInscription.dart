@@ -1,11 +1,13 @@
 
-import 'package:barberdz/restaurantLogin.dart';
+
+
+import 'package:barberdz/Client/clientLogin.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 
-class RestaurantInscription extends StatelessWidget {
+class ClientInscription extends StatelessWidget {
   final Map<String,dynamic> signUpData={'phone':null,'password':null};
   final _formKey=new GlobalKey<FormState>();
   final focusPhone=new FocusNode();
@@ -22,7 +24,7 @@ class RestaurantInscription extends StatelessWidget {
             child: SingleChildScrollView(
               child: Column(
                 children: <Widget>[
-                  Text("Restaurant",style: GoogleFonts.changa(fontSize: 55,fontWeight: FontWeight.bold),),
+                  Text("Client",style: GoogleFonts.changa(fontSize: 55,fontWeight: FontWeight.bold),),
                   Text("Inscription",style: TextStyle(fontSize: 25,fontWeight: FontWeight.w100),),
                   SizedBox(
                     height: MediaQuery.of(context).size.height*0.05,
@@ -205,7 +207,7 @@ class RestaurantInscription extends StatelessWidget {
                     children: <Widget>[
                       FlatButton(
                         onPressed: (){
-                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Restaurant()));
+                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Client()));
                         },
                         child:Text("Login",style: TextStyle(fontSize: 22,fontWeight: FontWeight.w400),),
                         shape: RoundedRectangleBorder(

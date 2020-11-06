@@ -31,6 +31,9 @@ dependencies:
   flutter_bloc: ^3.0.0
   clay_containers: ^0.2.2
   after_layout: ^1.0.7+2
+  flutter_svg:
+  flutter_counter: ^1.0.3
+
 
 dev_dependencies:
   flutter_test:
