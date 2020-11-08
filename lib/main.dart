@@ -1,10 +1,21 @@
+import 'package:barberdz/Client/accueil_bloc_nav/accueil_bloc_nav.dart';
 import 'package:barberdz/Client/clientLogin.dart';
 import 'package:barberdz/Restaurant/restaurantLogin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(
+  MultiBlocProvider(
+    providers: [
+      BlocProvider<AccueilNavBloc>(
+        create: (context)=>AccueilNavBloc(),
+      ),
+    ],
+    child: MyApp(),
+  )
+);
 
 class MyApp extends StatelessWidget {
   @override
@@ -15,7 +26,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'Online Food Ordering '),
     );
   }
 }
@@ -41,9 +52,9 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             WavyImageHomePage(),
-            Text("? هل انت",style: GoogleFonts.jomhuria(fontSize: 55,fontWeight: FontWeight.bold),),
+            Text("Are you a :",style: GoogleFonts.abel(fontSize: 40,fontWeight: FontWeight.bold),),
             Padding(
-              padding: const EdgeInsets.fromLTRB(10, 20, 10, 10),
+              padding: const EdgeInsets.fromLTRB(10, 40, 10, 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -63,7 +74,6 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ),
                       SizedBox(height: 10,),
-                      Text("صاحب مطعم",style: GoogleFonts.jomhuria(fontSize: 35,fontWeight: FontWeight.bold),),
                       Text("Restaurant",style: GoogleFonts.changa(fontSize: 25,fontWeight: FontWeight.bold),)
                     ],
                   ),
@@ -87,7 +97,6 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ),
                       SizedBox(height: 10,),
-                      Text("زبون",style: GoogleFonts.jomhuria(fontSize: 35,fontWeight: FontWeight.bold),),
                       Text("Client",style: GoogleFonts.changa(fontSize: 25,fontWeight: FontWeight.bold),)
                     ],
                   ),

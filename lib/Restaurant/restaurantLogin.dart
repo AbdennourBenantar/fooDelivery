@@ -57,7 +57,7 @@ class Restaurant extends StatelessWidget {
                                           borderSide: BorderSide(color: Colors.black),
                                       ),
                                       hintStyle: GoogleFonts.changa(fontSize: 18,fontWeight: FontWeight.normal,color: Colors.black.withAlpha(150)),
-                                      hintText: 'Numero de tel',
+                                      hintText: 'Phone Number',
                                       prefixIcon: Icon(Icons.phone,color: Colors.black,),
                                     ),
                                     validator: (String value){
@@ -94,7 +94,7 @@ class Restaurant extends StatelessWidget {
                                       focusedBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(color: Color.fromRGBO(0,0,0,1))
                                       ),
-                                      hintText: 'Mot de Passe',
+                                      hintText: 'Password',
                                       hintStyle: GoogleFonts.changa(fontSize: 18,fontWeight: FontWeight.normal,color: Colors.black.withAlpha(150)),
                                       prefixIcon: Icon(Icons.lock,color: Colors.black,),
                                     ),
@@ -123,66 +123,8 @@ class Restaurant extends StatelessWidget {
                     child: Container(
                       child: InkWell(
                         onTap: (){
-                          Alert(
-                            context: context,
-                            title: 'Code de Verification',
-                            content: Column(
-                              children: <Widget>[
-                                Text('Un code de verification a été envoyé a votre numero de téléphone',
-                                  style: GoogleFonts.changa(fontSize: 12,color: Colors.black),textAlign: TextAlign.center,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.fromLTRB(40, 20, 40, 20),
-                                  child: Row(
-                                    children: <Widget>[
-                                      Flexible(
-                                        child: new TextFormField(keyboardType: TextInputType.number,
-                                          style: GoogleFonts.changa(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.black),
-                                          textInputAction: TextInputAction.done,
-                                          onFieldSubmitted: (v){
-                                          },
-                                          onSaved: (String value){
-                                          },
-                                          decoration: InputDecoration(
-                                            enabledBorder: UnderlineInputBorder(
-                                                borderSide: BorderSide(color: Colors.black)
-                                            ),
-                                            focusedBorder: UnderlineInputBorder(
-                                              borderSide: BorderSide(color: Colors.black),
-                                            ),
-                                            hintStyle: GoogleFonts.changa(fontSize: 18,fontWeight: FontWeight.normal,color: Colors.black.withAlpha(150)),
-                                            hintText: 'Code',
-                                            prefixIcon: Icon(Icons.lock_outline,color: Colors.black,),
-                                          ),
-                                          validator: (String value){
-                                            if(value.trim().isEmpty)
-                                            {
-                                              return'Code is required';
-                                            }else{
-                                              return"";
-                                            }
-                                          },
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                            buttons: [
-                              DialogButton(
-                                onPressed: (){
-                                  //firebaseAuth.verifyPhoneNumber(phoneNumber: null, timeout: null, verificationCompleted: null, verificationFailed: null, codeSent: null, codeAutoRetrievalTimeout: null)
-                                  Navigator.pushReplacement(context, new MaterialPageRoute(builder: (context)=>SidebarLayout()));
-                                },
-                                child: Text("Valider",
-                                  style: GoogleFonts.changa(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.white),
-                                ),
-                                color: Colors.black,
-                              )
-                            ]
-                          ).show();
-                        },
+                          Navigator.pushReplacement(context, new MaterialPageRoute(builder: (context)=>SidebarLayout()));
+                          },
                         child: new Icon(Icons.arrow_forward,size: 40,color: Colors.white,),
                       ),
                         height: MediaQuery.of(context).size.height*0.1,
@@ -210,7 +152,7 @@ class Restaurant extends StatelessWidget {
                         onPressed: (){
                           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>RestaurantInscription()));
                         },
-                        child:Text("Nouveau compte",style: TextStyle(fontSize: 22,fontWeight: FontWeight.w400),),
+                        child:Text("New Account",style: TextStyle(fontSize: 22,fontWeight: FontWeight.w400),),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
                           side: BorderSide(color: Colors.black)

@@ -83,7 +83,7 @@ class _ParametresState extends State<Parametres> {
                         ),
                       ),
                       ListTile(
-                        title:Text("ha_benantar@esi.dz",style:TextStyle(color: Colors.black.withAlpha(100),fontSize: 15),),
+                        title:Text("xyz@gmail.com",style:TextStyle(color: Colors.black.withAlpha(100),fontSize: 15),),
                         leading: Icon(
                           Icons.mail_outline,
                           color: Colors.orange.withOpacity(0.8),

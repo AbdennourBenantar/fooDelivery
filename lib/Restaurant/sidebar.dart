@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:ui';
 
 import 'package:barberdz/MenuItem.dart';
-import 'package:barberdz/Restaurant/RestaurantPlats.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rxdart/rxdart.dart';
@@ -63,7 +62,7 @@ class _SideBarState extends State<SideBar> with SingleTickerProviderStateMixin<S
                         SizedBox(height: 100,),
                         ListTile(
                           title: Text("Abdenour",style: TextStyle(color: Colors.white,fontSize: 25,fontWeight: FontWeight.w800),),
-                          subtitle: Text("ha_benantar@esi.dz",style:TextStyle(color: Colors.white.withAlpha(100),fontSize: 15),),
+                          subtitle: Text("xyz@gmail.com",style:TextStyle(color: Colors.white.withAlpha(100),fontSize: 15),),
                           leading: CircleAvatar(
                             child: Icon(
                               Icons.perm_identity,
@@ -82,7 +81,7 @@ class _SideBarState extends State<SideBar> with SingleTickerProviderStateMixin<S
                         ),
                         MenuItem(
                           icon: Icons.dashboard,
-                          title: "Tableau de bord",
+                          title: "Dashboard",
                           onTap: (){
                             onIconPressed();
                             BlocProvider.of<NavigationBloc>(context).add(NavigationEvents.DashPageClickedEvent);
@@ -90,7 +89,7 @@ class _SideBarState extends State<SideBar> with SingleTickerProviderStateMixin<S
                         ),
                         MenuItem(
                           icon: Icons.fastfood,
-                          title: "Plats",
+                          title: "Dishes",
                           onTap: (){
                             onIconPressed();
                             BlocProvider.of<NavigationBloc>(context).add(NavigationEvents.PlatsClickedEvent);
@@ -98,7 +97,7 @@ class _SideBarState extends State<SideBar> with SingleTickerProviderStateMixin<S
                         ),
                         MenuItem(
                           icon: Icons.add_shopping_cart,
-                          title: "Commandes",
+                          title: "Orders",
                           onTap: (){
                             onIconPressed();
                             BlocProvider.of<NavigationBloc>(context).add(NavigationEvents.CommandesClickedEvent);
@@ -113,7 +112,7 @@ class _SideBarState extends State<SideBar> with SingleTickerProviderStateMixin<S
                         ),
                         MenuItem(
                           icon: Icons.settings,
-                          title: "Parametres",
+                          title: "Settings",
                           onTap: (){
                             onIconPressed();
                             BlocProvider.of<NavigationBloc>(context).add(NavigationEvents.ParametresClickedEvent);
@@ -121,7 +120,7 @@ class _SideBarState extends State<SideBar> with SingleTickerProviderStateMixin<S
                         ),
                         MenuItem(
                           icon: Icons.exit_to_app,
-                          title: "Deconnexion",
+                          title: "Logout",
                           onTap:(){
                             Navigator.pop(context);
                           }

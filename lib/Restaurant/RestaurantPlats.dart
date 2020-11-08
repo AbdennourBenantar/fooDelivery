@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:barberdz/Restaurant/option.dart';
-import 'package:barberdz/pizzas.dart';
+import 'package:barberdz/dishes.dart';
 import 'package:barberdz/Restaurant/plat_card_shape.dart';
 import 'package:barberdz/Restaurant/plat_details.dart';
 import 'package:clay_containers/clay_containers.dart';
@@ -148,10 +148,10 @@ class __FoodOptionAndItemsState extends State<_FoodOptionAndItems> {
                               onPressed: (){
                                 Alert(
                                     context: context,
-                                    title: 'Confirmation de la suppression',
+                                    title: 'Confirm removal',
                                     content: Column(
                                       children: <Widget>[
-                                        Text('Voulez-vous vraiment supprimer ce plat ? vos clients ne peuvent plus le commander ',
+                                        Text("Are you sure deleting this diish ? Your client won't be able to order it again",
                                           style: GoogleFonts.changa(fontSize: 12,color: Colors.black),textAlign: TextAlign.center,
                                         ),
                                       ],
@@ -166,7 +166,7 @@ class __FoodOptionAndItemsState extends State<_FoodOptionAndItems> {
 
                                         },
                                         child: Center(
-                                          child: Text("Confirmer",
+                                          child: Text("Confirm",
                                             style: GoogleFonts.changa(fontSize: 22,fontWeight: FontWeight.bold,color: Colors.white),
                                           ),
                                         ),
@@ -243,10 +243,10 @@ class __FoodOptionAndItemsState extends State<_FoodOptionAndItems> {
                               onPressed: (){
                                 Alert(
                                     context: context,
-                                    title: 'Confirmation de la suppression',
+                                    title: 'Confirm removal',
                                     content: Column(
                                       children: <Widget>[
-                                        Text('Voulez-vous vraiment supprimer ce plat ? vos clients ne peuvent plus le commander ',
+                                        Text("Are you sure deleting this dish ? your clients won't be able to order it again",
                                           style: GoogleFonts.changa(fontSize: 12,color: Colors.black),textAlign: TextAlign.center,
                                         ),
                                       ],
@@ -261,7 +261,7 @@ class __FoodOptionAndItemsState extends State<_FoodOptionAndItems> {
 
                                         },
                                         child: Center(
-                                          child: Text("Confirmer",
+                                          child: Text("Confirm",
                                             style: GoogleFonts.changa(fontSize: 22,fontWeight: FontWeight.bold,color: Colors.white),
                                           ),
                                         ),
@@ -334,15 +334,15 @@ class __FoodOptionAndItemsState extends State<_FoodOptionAndItems> {
                           child: Align(
                             child: IconButton(
                               icon:Icon(Icons.close),
-                              iconSize: 25,
+                              iconSize: 30,
                               color: Colors.black.withOpacity(0.8),
                               onPressed: (){
                                 Alert(
                                     context: context,
-                                    title: 'Confirmation de la suppression',
+                                    title: 'Confirm',
                                     content: Column(
                                       children: <Widget>[
-                                        Text('Voulez-vous vraiment supprimer ce plat ? vos clients ne peuvent plus le commander ',
+                                        Text("Are you sure deleting this dish ? your client won't be able to order it again",
                                           style: GoogleFonts.changa(fontSize: 12,color: Colors.black),textAlign: TextAlign.center,
                                         ),
                                       ],
@@ -357,7 +357,7 @@ class __FoodOptionAndItemsState extends State<_FoodOptionAndItems> {
 
                                         },
                                         child: Center(
-                                          child: Text("Confirmer",
+                                          child: Text("Confirm",
                                             style: GoogleFonts.changa(fontSize: 22,fontWeight: FontWeight.bold,color: Colors.white),
                                           ),
                                         ),

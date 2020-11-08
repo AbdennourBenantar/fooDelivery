@@ -1,6 +1,6 @@
 import 'package:barberdz/Restaurant/RestaurantPlats.dart';
 import 'package:barberdz/bloc/bloc_navigation/navigation_bloc.dart';
-import 'package:barberdz/pizzas.dart';
+import 'package:barberdz/dishes.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
@@ -22,7 +22,7 @@ class _RestaurantCommandesState extends State<RestaurantCommandes> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               SizedBox(height: MediaQuery.of(context).size.height*0.07,width: MediaQuery.of(context).size.width,),
-              Titlee(text: 'Commandes recues',),
+              Titlee(text: 'Recieved Orders',),
               SizedBox(height: MediaQuery.of(context).size.height*0.01,width: MediaQuery.of(context).size.width,),
 
               Expanded(
@@ -57,7 +57,7 @@ class _RestaurantCommandesState extends State<RestaurantCommandes> {
                                               fontSize: 18,
                                               fontWeight: FontWeight.bold
                                           ),),
-                                          Text("Quantité :"+((index%platFav.length)+1).toString(),style: GoogleFonts.abel(
+                                          Text("Quantity :"+((index%platFav.length)+1).toString(),style: GoogleFonts.abel(
                                               fontSize: 14,
                                               fontWeight: FontWeight.w100
                                           ),),
@@ -81,7 +81,6 @@ class _RestaurantCommandesState extends State<RestaurantCommandes> {
                                                 icon: Icon(Icons.check),
                                                 color: Colors.green,
                                                 onPressed: (){
-                                                  print("df");
                                                 },
                                                 iconSize: 30,
                                               ),

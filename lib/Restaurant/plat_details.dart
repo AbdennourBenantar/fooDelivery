@@ -1,4 +1,4 @@
-import 'package:barberdz/pizzas.dart';
+import 'package:barberdz/dishes.dart';
 import 'package:flutter/material.dart';
 
 class PlatDetails extends StatefulWidget {

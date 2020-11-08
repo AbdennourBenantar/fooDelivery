@@ -1,9 +1,9 @@
 abstract class Plat{
-  final String imagePath;
-  final String title;
-  final String description;
-  final String from;
-  final double price;
+   String imagePath;
+   String title;
+   String description;
+   String from;
+   double price;
   Plat(this.imagePath,this.title,this.description,this.from, this.price);
 }
 
@@ -94,5 +94,4 @@ class Carted extends Plat{
   
 }
 final platCarted=[
-
 ];

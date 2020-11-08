@@ -57,7 +57,7 @@ class ClientInscription extends StatelessWidget {
                                         borderSide: BorderSide(color: Colors.black),
                                       ),
                                       hintStyle: GoogleFonts.changa(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.black.withAlpha(150)),
-                                      hintText: 'Telephone',
+                                      hintText: 'Phone Number',
                                       prefixIcon: Icon(Icons.phone,color: Colors.black,),
                                     ),
                                     validator: (String value){
@@ -94,7 +94,7 @@ class ClientInscription extends StatelessWidget {
                                       focusedBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(color: Color.fromRGBO(0,0,0,1))
                                       ),
-                                      hintText: 'Mot de Passe',
+                                      hintText: 'Password',
                                       hintStyle: GoogleFonts.changa(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.black.withAlpha(150)),
                                       prefixIcon: Icon(Icons.lock,color: Colors.black,),
                                     ),
@@ -125,10 +125,10 @@ class ClientInscription extends StatelessWidget {
                         onTap: (){
                           Alert(
                               context: context,
-                              title: 'Code de Verification',
+                              title: 'Verification Code',
                               content: Column(
                                 children: <Widget>[
-                                  Text('Un code de verification a été envoyé a votre numero de téléphone',
+                                  Text('A verification code has been sent to the phone number you provided earlier',
                                     style: GoogleFonts.changa(fontSize: 12,color: Colors.black),textAlign: TextAlign.center,
                                   ),
                                   Padding(
@@ -172,9 +172,9 @@ class ClientInscription extends StatelessWidget {
                               buttons: [
                                 DialogButton(
                                   onPressed: (){
-                                    //firebaseAuth.verifyPhoneNumber(phoneNumber: null, timeout: null, verificationCompleted: null, verificationFailed: null, codeSent: null, codeAutoRetrievalTimeout: null)
+
                                   },
-                                  child: Text("Valider",
+                                  child: Text("Validate",
                                     style: GoogleFonts.changa(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.white),
                                   ),
                                   color: Colors.black,

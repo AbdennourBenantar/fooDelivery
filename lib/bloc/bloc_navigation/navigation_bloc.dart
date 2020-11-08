@@ -1,7 +1,8 @@
 import 'package:barberdz/Client/accueil.dart';
-import 'package:barberdz/Client/historique.dart';
+import 'package:barberdz/Client/clientLayout.dart';
 import 'package:barberdz/Client/mesCommandes.dart';
 import 'package:barberdz/Restaurant/restaurantDash.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../Restaurant/RestaurantPlats.dart';
 import '../../Restaurant/parametre.dart';
@@ -17,7 +18,6 @@ enum ClientNavigationEvents{
   ParametresClickedEvent,
   AccueilClickedEvent,
   MesCommandesClickedEvent,
-  HistoriqueClickedEvent,
 }
 
 abstract class NavigationStates{}
@@ -51,8 +51,6 @@ class ClientNavBloc extends Bloc<ClientNavigationEvents,NavigationStates>{
       case ClientNavigationEvents.AccueilClickedEvent: yield Accueil();
       break;
       case ClientNavigationEvents.MesCommandesClickedEvent: yield Cart();
-      break;
-      case ClientNavigationEvents.HistoriqueClickedEvent: yield Historique();
       break;
       case ClientNavigationEvents.ParametresClickedEvent: yield Parametres();
       break;

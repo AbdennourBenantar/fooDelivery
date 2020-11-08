@@ -1,4 +1,4 @@
-import 'package:barberdz/pizzas.dart';
+import 'package:barberdz/dishes.dart';
 import 'package:flutter/material.dart';
 
 import '../bloc/bloc_navigation/navigation_bloc.dart';
@@ -42,7 +42,7 @@ class _RestaurantDashState extends State<RestaurantDash> {
                             fontSize: 14,
                             fontWeight: FontWeight.w800
                         ),),
-                        Text("Ordres d'aujourd'hui",style: GoogleFonts.abel(
+                        Text("Today's Orders",style: GoogleFonts.abel(
                             fontSize: 14,
                             fontWeight: FontWeight.w400
                         ),),
@@ -55,7 +55,7 @@ class _RestaurantDashState extends State<RestaurantDash> {
                             fontSize: 14,
                             fontWeight: FontWeight.w800
                         ),),
-                        Text("Revenus d'aujourd'hui",style: GoogleFonts.abel(
+                        Text("Today's Incomes",style: GoogleFonts.abel(
                             fontSize: 14,
                             fontWeight: FontWeight.w400
                         ),),
@@ -81,11 +81,11 @@ class _RestaurantDashState extends State<RestaurantDash> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
-                            Text('Ordres totaux',style: GoogleFonts.abel(
+                            Text('Total Orders',style: GoogleFonts.abel(
                                 fontSize: 14,
                                 fontWeight: FontWeight.bold
                             ),),
-                            Text("01 Novembre - 31 Décembre",style: GoogleFonts.abel(
+                            Text("01 November - 31 December",style: GoogleFonts.abel(
                                 fontSize: 8,
                                 fontWeight: FontWeight.w100
                             ),),
@@ -122,11 +122,11 @@ class _RestaurantDashState extends State<RestaurantDash> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
-                            Text('Revenues totales',style: GoogleFonts.abel(
+                            Text('Total Incomes',style: GoogleFonts.abel(
                                 fontSize: 14,
                                 fontWeight: FontWeight.bold
                             ),),
-                            Text("01 Novembre - 31 Décembre",style: GoogleFonts.abel(
+                            Text("01 November - 31 December",style: GoogleFonts.abel(
                                 fontSize: 8,
                                 fontWeight: FontWeight.w400
                             ),),
@@ -168,11 +168,11 @@ class _RestaurantDashState extends State<RestaurantDash> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
-                            Text('Nouveaux clients',style: GoogleFonts.abel(
+                            Text('New clients',style: GoogleFonts.abel(
                                 fontSize: 14,
                                 fontWeight: FontWeight.bold
                             ),),
-                            Text("01 Novembre - 31 Décembre",style: GoogleFonts.abel(
+                            Text("01 November - 31 December",style: GoogleFonts.abel(
                                 fontSize: 8,
                                 fontWeight: FontWeight.w100
                             ),),
@@ -209,7 +209,7 @@ class _RestaurantDashState extends State<RestaurantDash> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
-                            Text('Avis des clients',style: GoogleFonts.abel(
+                            Text('Clients Ratings',style: GoogleFonts.abel(
                                 fontSize: 14,
                                 fontWeight: FontWeight.bold
                             ),),
@@ -261,7 +261,7 @@ class _RestaurantDashState extends State<RestaurantDash> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 15),
                 child: Text(
-                  'Les Plats les plus commandés ',
+                  'Most ordered dishes ',
                   style: GoogleFonts.abel(color: Colors.black,
                   fontSize: 26,fontWeight: FontWeight.bold
                   ),
@@ -298,14 +298,14 @@ class _RestaurantDashState extends State<RestaurantDash> {
                                    fontSize: 18,
                                    fontWeight: FontWeight.bold
                                ),),
-                               Text("829 ordres",style: GoogleFonts.abel(
+                               Text("829 orders",style: GoogleFonts.abel(
                                    fontSize: 14,
                                    fontWeight: FontWeight.w100
                                ),),
                                SizedBox(
                                  height: MediaQuery.of(context).size.height*0.02,
                                ),
-                               Text('Avis des clients',style: GoogleFonts.abel(
+                               Text('Clients Ratings',style: GoogleFonts.abel(
                                    fontSize: 18,
                                    fontWeight: FontWeight.bold
                                ),),

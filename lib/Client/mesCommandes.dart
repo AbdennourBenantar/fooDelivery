@@ -1,9 +1,10 @@
+import 'package:barberdz/Client/accueil_bloc_nav/accueil_bloc_nav.dart';
 import 'package:barberdz/Restaurant/RestaurantPlats.dart';
 import 'package:barberdz/bloc/bloc_navigation/navigation_bloc.dart';
-import 'package:barberdz/pizzas.dart';
+import 'package:barberdz/dishes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
 
 class Cart extends StatefulWidget with NavigationStates{
   @override
@@ -13,6 +14,18 @@ class Cart extends StatefulWidget with NavigationStates{
 class _CartState extends State<Cart> {
   @override
   Widget build(BuildContext context) {
+    double countTotal(){
+      double sum=0;
+      if(platCarted.length>0){
+      for(int i=0;i<platCarted.length;i++)
+        {
+          sum=sum+(platCarted[i].price)*(platCarted[i].x);
+        }
+      }else{
+        sum=0;
+      }
+      return sum;
+    }
     return Scaffold(
       body: Stack(
         children: <Widget>[
@@ -22,8 +35,13 @@ class _CartState extends State<Cart> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               SizedBox(height: MediaQuery.of(context).size.height*0.07,width: MediaQuery.of(context).size.width,),
-              Titlee(text: 'My cart',),
-              SizedBox(height: MediaQuery.of(context).size.height*0.01,width: MediaQuery.of(context).size.width,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Titlee(text: 'My cart',),
+                ],
+              ),
+              SizedBox(height: MediaQuery.of(context).size.height*0.04,width: MediaQuery.of(context).size.width,),
 
               Expanded(
                 child: SizedBox(
@@ -34,7 +52,7 @@ class _CartState extends State<Cart> {
                           width: MediaQuery.of(context).size.width,
                           height: MediaQuery.of(context).size.height*0.22,
                           child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.symmetric(vertical:8.0,horizontal: 12),
                             child: Material(
                               elevation: 8,
                               borderRadius: BorderRadius.circular(8),
@@ -45,7 +63,7 @@ class _CartState extends State<Cart> {
                                   Container(
                                       height: MediaQuery.of(context).size.height*0.15,
                                       width: MediaQuery.of(context).size.width*0.4,
-                                      child: Image.asset(platcmd[index].imagePath,fit: BoxFit.contain,)),
+                                      child: Image.asset(platCarted[index].imagePath,fit: BoxFit.contain,)),
                                   SizedBox(
                                     width: MediaQuery.of(context).size.width*0.02,
                                   ),
@@ -57,13 +75,39 @@ class _CartState extends State<Cart> {
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold
                                       ),),
-                                      Text("Quantité : x"+platCarted[index].x,style: GoogleFonts.abel(
+                                      Text("Quantity : x"+platCarted[index].x.toString(),style: GoogleFonts.abel(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w100
+                                      ),),
+                                      Text("Unity price: "+platCarted[index].price.toString()+" DA",style: GoogleFonts.abel(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w100
+                                      ),),
+                                      Text("Total : "+(platCarted[index].x*platCarted[index].price).toString()+" DA",style: GoogleFonts.abel(
                                           fontSize: 14,
                                           fontWeight: FontWeight.w100
                                       ),),
                                       SizedBox(
                                         height: MediaQuery.of(context).size.height*0.02,
                                       ),
+                                      FlatButton(
+                                        color: Colors.red,
+                                        child: Row(
+                                          children: <Widget>[
+                                            Icon(Icons.delete),
+                                            SizedBox(width: MediaQuery.of(context).size.width*0.02,),
+                                            Text('Remove from cart',style: GoogleFonts.abel(fontSize: 14, fontWeight: FontWeight.w500),),
+                                          ],
+                                        ),
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(5)
+                                        ),
+                                        onPressed: (){
+                                          setState(() {
+                                            platCarted.remove(platCarted[index]);
+                                          });
+                                        },
+                                      )
                                       
                                     ],
                                   )
@@ -74,7 +118,7 @@ class _CartState extends State<Cart> {
 
                         );
                       },
-                      itemCount: platcmd.length),
+                      itemCount: platCarted.length),
                 ),
               )
 
@@ -82,6 +126,36 @@ class _CartState extends State<Cart> {
             ],
           ),
         ],
+      ),
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+            color: Colors.orange.withOpacity(0.8),
+            borderRadius: BorderRadius.only(topLeft: Radius.circular(40),topRight: Radius.circular(40))
+        ),
+        height: MediaQuery.of(context).size.height*0.12,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: <Widget>[
+            Icon(Icons.arrow_upward,color: Colors.black,size: 20,),
+            Padding(
+              padding: const EdgeInsets.all(6.0),
+              child: Text('Swipe up to place your order',style: GoogleFonts.abel(color:Colors.black,fontSize: 14, fontWeight: FontWeight.w100),),
+            ),
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.black,
+                borderRadius: BorderRadius.only(topLeft: Radius.circular(40),topRight: Radius.circular(40))
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  Icon(Icons.shopping_basket,color: Colors.white,size: 30,),
+                  Text('Total to pay is : '+countTotal().toString()+" DA",style: GoogleFonts.abel(color:Colors.white,fontSize: 18, fontWeight: FontWeight.w500),),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

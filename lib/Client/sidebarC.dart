@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:ui';
 
 import 'package:barberdz/MenuItem.dart';
-import 'package:barberdz/Restaurant/RestaurantPlats.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rxdart/rxdart.dart';
@@ -63,7 +62,7 @@ class _SideBarCState extends State<SideBarC> with SingleTickerProviderStateMixin
                         SizedBox(height: 100,),
                         ListTile(
                           title: Text("Abdenour",style: TextStyle(color: Colors.white,fontSize: 25,fontWeight: FontWeight.w800),),
-                          subtitle: Text("ha_benantar@esi.dz",style:TextStyle(color: Colors.white.withAlpha(100),fontSize: 15),),
+                          subtitle: Text("xyz@gmail.com",style:TextStyle(color: Colors.white.withAlpha(100),fontSize: 15),),
                           leading: CircleAvatar(
                             child: Icon(
                               Icons.perm_identity,
@@ -82,7 +81,7 @@ class _SideBarCState extends State<SideBarC> with SingleTickerProviderStateMixin
                         ),
                         MenuItem(
                           icon: Icons.home,
-                          title: "Accueil",
+                          title: "Home",
                           onTap: (){
                             onIconPressed();
                             BlocProvider.of<ClientNavBloc>(context).add(ClientNavigationEvents.AccueilClickedEvent);
@@ -90,20 +89,13 @@ class _SideBarCState extends State<SideBarC> with SingleTickerProviderStateMixin
                         ),
                         MenuItem(
                           icon: Icons.shopping_cart,
-                          title: "Mes commandes",
+                          title: "My orders",
                           onTap: (){
                             onIconPressed();
                             BlocProvider.of<ClientNavBloc>(context).add(ClientNavigationEvents.MesCommandesClickedEvent);
                           },
                         ),
-                        MenuItem(
-                          icon: Icons.history,
-                          title: "Historique",
-                          onTap: (){
-                            onIconPressed();
-                            BlocProvider.of<ClientNavBloc>(context).add(ClientNavigationEvents.HistoriqueClickedEvent);
-                          },
-                        ),
+
                         Divider(
                           height: 64,
                           thickness: 0.5,
@@ -113,7 +105,7 @@ class _SideBarCState extends State<SideBarC> with SingleTickerProviderStateMixin
                         ),
                         MenuItem(
                           icon: Icons.settings,
-                          title: "Parametres",
+                          title: "Settings",
                           onTap: (){
                             onIconPressed();
                             BlocProvider.of<ClientNavBloc>(context).add(ClientNavigationEvents.ParametresClickedEvent);
@@ -121,7 +113,7 @@ class _SideBarCState extends State<SideBarC> with SingleTickerProviderStateMixin
                         ),
                         MenuItem(
                             icon: Icons.exit_to_app,
-                            title: "Deconnexion",
+                            title: "Logout",
                             onTap:(){
                               Navigator.pop(context);
                             }
