@@ -53,11 +53,23 @@ class __FoodListState extends State<_FoodList> {
       child: SizedBox(
         height: MediaQuery.of(context).size.height * 0.9,
         width: MediaQuery.of(context).size.width * 0.97,
-        child: ListView.builder(
+        child: platcmd.length>0?ListView.builder(
             itemBuilder: (context, index) {
               return Item(plat: widget.items[index],dv: 1,);
             },
-            itemCount: widget.items.length),
+            itemCount: widget.items.length):
+        Padding(
+          padding: const EdgeInsets.all(30.0),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Image.asset('assets/bg.png',fit: BoxFit.fill,),
+                Text('You have not ordered food yet ',style: GoogleFonts.abel(fontSize: 20,color: Colors.black87),)
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -85,7 +97,6 @@ class _ItemState extends State<Item> {
   }
   @override
   Widget build(BuildContext context) {
-    if(platCarted.length>0){
     return SizedBox(
       width: MediaQuery
           .of(context)
@@ -211,10 +222,6 @@ class _ItemState extends State<Item> {
         ),
       ),
     );
-    }else{
-      return Center(
-        child: Image.asset('assets/bg.png'),
-      );
-    }
+
   }
 }
