@@ -1,5 +1,5 @@
-# barberdz
-is a food delivery app in Khenchela ,Algeria
+# Food Delivery
+is a food delivery app
 
 ## Getting Started
 
