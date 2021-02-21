@@ -24,7 +24,6 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
   google_fonts: ^0.4.0
-  firebase_auth: ^0.15.5+3
   rflutter_alert: ^1.0.2
   custom_navigation_drawer: ^0.0.1
   rxdart: ^0.23.1
@@ -33,6 +32,23 @@ dependencies:
   after_layout: ^1.0.7+2
   flutter_svg:
   flutter_counter: ^1.0.3
+  geolocator:
+  google_maps_flutter:
+  geocoding:
+  geocoder:
+  progress_dialog: ^1.2.4
+  firebase_auth: ^0.18.4+1
+  cloud_firestore:
+  firebase_core: ^0.5.0+1
+  shared_preferences: ^0.5.12+4
+  firebase_storage: ^5.2.0
+  image_picker: ^0.6.7+17
+  sweetalert: any
+  badges: ^1.1.4
+  flutter_rating_bar: ^3.2.0
+  buttons_tabbar: ^1.0.2+1
+
+
 
 
 dev_dependencies:

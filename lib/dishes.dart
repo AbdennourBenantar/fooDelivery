@@ -47,13 +47,13 @@ final assiette=[
 ];
 final sands=[
   Sand('assets/tacos.png','Tacos','Tacos','',200,'Bruger King'),
-  Sand('assets/chawarma.png','Chawarma','Chawarma','',300,"L'Oasis"),
+  Sand('assets/chawarma.png','Kebab','Kebab','',300,"L'Oasis"),
   Sand('assets/tacos.png','Tacos','Tacos','',400,'Bruger King'),
-  Sand('assets/chawarma.png','Chawarma','Chawarma','',200,"L'Oasis"),
+  Sand('assets/chawarma.png','Kebab','Kebab','',200,"L'Oasis"),
   Sand('assets/tacos.png','Tacos','Tacos','',200,'Bruger King'),
-  Sand('assets/chawarma.png','Chawarma','Chawarma','',600,"L'Oasis"),
+  Sand('assets/chawarma.png','Kebab','Kebab','',600,"L'Oasis"),
   Sand('assets/tacos.png','Tacos','Tacos','',400,'Bruger King'),
-  Sand('assets/chawarma.png','Chawarma','Chawarma','',500,"L'Oasis")
+  Sand('assets/chawarma.png','Kebab','Kebab','',500,"L'Oasis")
 ];
 final platFav=[
   Assiette('assets/variee.png','Assiette variée','Complet marinée','',400,'Bruger King'),
@@ -69,7 +69,7 @@ final platcmd=[
   Pizza('assets/sicillian.png','Pizza Sicilienne','Anchois, oignons,olives et fromage','',400,'Bruger King'),
   Pizza('assets/pepperoni.png','Pizza Pepperoni','Pepperoni, Mozzarella et Parmesan','',600,'Bruger King'),
   Sand('assets/tacos.png','Tacos','Tacos','',400,'Bruger King'),
-  Sand('assets/chawarma.png','Chawarma','Chawarma','',600,'Bruger King')
+  Sand('assets/chawarma.png','Kebab','Kebab','',600,'Bruger King')
 ];
 /**
  * final pizzas=[

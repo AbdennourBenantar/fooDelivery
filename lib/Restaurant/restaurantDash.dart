@@ -1,7 +1,10 @@
 import 'package:barberdz/dishes.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 
 import '../bloc/bloc_navigation/navigation_bloc.dart';
+import '../config.dart';
 import 'RestaurantPlats.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -11,6 +14,42 @@ class RestaurantDash extends StatefulWidget with NavigationStates {
 }
 
 class _RestaurantDashState extends State<RestaurantDash> {
+  Position current;
+
+  void _getCurrentLocation() {
+    Geolocator.getCurrentPosition().then((Position position){
+      setState(() async {
+        current=position;
+        FirebaseFirestore.instance.collection("restos").doc(Food.sharedPreferences.getString(Food.restoUID)).get().then((value) async {
+          if(value.data()[Food.restoAutorise]=='1'){
+            FirebaseFirestore.instance.collection("restos").doc(Food.sharedPreferences.getString(Food.restoUID)).update({
+              Food.restoLatitude:current.latitude,
+              Food.restoLongitude:current.longitude,
+              Food.restoAutorise:'2'
+
+            });
+            await Food.sharedPreferences.setString(Food.restoLatitude, current.latitude.toString());
+            await Food.sharedPreferences.setString(Food.restoLongitude,current.longitude.toString());
+          }
+        });
+
+      });
+    }).catchError((e){
+      print(e);
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    if((Food.sharedPreferences.getString(Food.restoLatitude)=='0') &&(Food.sharedPreferences.getString(Food.restoLongitude)=='0'))
+    {
+      _getCurrentLocation();
+    }else{
+      current=Position(latitude: double.parse(Food.sharedPreferences.getString(Food.restoLatitude)),longitude: double.parse(Food.sharedPreferences.getString(Food.restoLongitude)));
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +81,7 @@ class _RestaurantDashState extends State<RestaurantDash> {
                             fontSize: 14,
                             fontWeight: FontWeight.w800
                         ),),
-                        Text("Today's Orders",style: GoogleFonts.abel(
+                        Text("Commandes d'aujourd'hui",style: GoogleFonts.abel(
                             fontSize: 14,
                             fontWeight: FontWeight.w400
                         ),),
@@ -51,11 +90,11 @@ class _RestaurantDashState extends State<RestaurantDash> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
-                        Text('23600 DA',style: GoogleFonts.abel(
+                        Text('2300 €',style: GoogleFonts.abel(
                             fontSize: 14,
                             fontWeight: FontWeight.w800
                         ),),
-                        Text("Today's Incomes",style: GoogleFonts.abel(
+                        Text("Gains d'aujourd'hui",style: GoogleFonts.abel(
                             fontSize: 14,
                             fontWeight: FontWeight.w400
                         ),),
@@ -81,11 +120,11 @@ class _RestaurantDashState extends State<RestaurantDash> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
-                            Text('Total Orders',style: GoogleFonts.abel(
+                            Text("Commandes d'aujourd'hui",style: GoogleFonts.abel(
                                 fontSize: 14,
                                 fontWeight: FontWeight.bold
                             ),),
-                            Text("01 November - 31 December",style: GoogleFonts.abel(
+                            Text("01 Novembre - 31 Decembre",style: GoogleFonts.abel(
                                 fontSize: 8,
                                 fontWeight: FontWeight.w100
                             ),),
@@ -122,11 +161,11 @@ class _RestaurantDashState extends State<RestaurantDash> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
-                            Text('Total Incomes',style: GoogleFonts.abel(
+                            Text('Gain total',style: GoogleFonts.abel(
                                 fontSize: 14,
                                 fontWeight: FontWeight.bold
                             ),),
-                            Text("01 November - 31 December",style: GoogleFonts.abel(
+                            Text("01 Novembre - 31 Decembre",style: GoogleFonts.abel(
                                 fontSize: 8,
                                 fontWeight: FontWeight.w400
                             ),),
@@ -136,7 +175,7 @@ class _RestaurantDashState extends State<RestaurantDash> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
-                                Text('610000 DA   ',style: GoogleFonts.abel(
+                                Text('6100 €   ',style: GoogleFonts.abel(
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold
                                 ),),
@@ -168,11 +207,11 @@ class _RestaurantDashState extends State<RestaurantDash> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
-                            Text('New clients',style: GoogleFonts.abel(
+                            Text('Nouveaux clients',style: GoogleFonts.abel(
                                 fontSize: 14,
                                 fontWeight: FontWeight.bold
                             ),),
-                            Text("01 November - 31 December",style: GoogleFonts.abel(
+                            Text("01 Novembre - 31 Decembre",style: GoogleFonts.abel(
                                 fontSize: 8,
                                 fontWeight: FontWeight.w100
                             ),),
@@ -209,7 +248,7 @@ class _RestaurantDashState extends State<RestaurantDash> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
-                            Text('Clients Ratings',style: GoogleFonts.abel(
+                            Text('Avis des clients',style: GoogleFonts.abel(
                                 fontSize: 14,
                                 fontWeight: FontWeight.bold
                             ),),
@@ -261,7 +300,7 @@ class _RestaurantDashState extends State<RestaurantDash> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 15),
                 child: Text(
-                  'Most ordered dishes ',
+                  'Les plats les plus demandés ',
                   style: GoogleFonts.abel(color: Colors.black,
                   fontSize: 26,fontWeight: FontWeight.bold
                   ),
@@ -298,14 +337,14 @@ class _RestaurantDashState extends State<RestaurantDash> {
                                    fontSize: 18,
                                    fontWeight: FontWeight.bold
                                ),),
-                               Text("829 orders",style: GoogleFonts.abel(
+                               Text("829 commandes",style: GoogleFonts.abel(
                                    fontSize: 14,
                                    fontWeight: FontWeight.w100
                                ),),
                                SizedBox(
                                  height: MediaQuery.of(context).size.height*0.02,
                                ),
-                               Text('Clients Ratings',style: GoogleFonts.abel(
+                               Text('Avis des clients',style: GoogleFonts.abel(
                                    fontSize: 18,
                                    fontWeight: FontWeight.bold
                                ),),

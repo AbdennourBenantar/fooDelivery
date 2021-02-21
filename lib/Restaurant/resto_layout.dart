@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'sidebar.dart';
 
-class SidebarLayout extends StatelessWidget {
+class RestoLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

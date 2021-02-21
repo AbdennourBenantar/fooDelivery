@@ -18,7 +18,7 @@ class _ParametresState extends State<Parametres> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             SizedBox(height: MediaQuery.of(context).size.height*0.07,width: MediaQuery.of(context).size.width,),
-            Titlee(text: 'Burger King',),
+            Titlee(text: 'Mon profil',),
             SizedBox(height: MediaQuery.of(context).size.height*0.2,width: MediaQuery.of(context).size.width,),
             Center(
               child: Padding(
@@ -31,7 +31,6 @@ class _ParametresState extends State<Parametres> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       SizedBox(height: MediaQuery.of(context).size.height*0.02,width: MediaQuery.of(context).size.width,),
-
                       CircleAvatar(
                         child: Icon(
                             Icons.perm_identity,
@@ -74,7 +73,6 @@ class _ParametresState extends State<Parametres> {
                           ],
                         ),
                       ),
-
                       ListTile(
                         title:Text("0779089015",style:TextStyle(color: Colors.black.withAlpha(100),fontSize: 15),),
                         leading: Icon(
@@ -86,6 +84,13 @@ class _ParametresState extends State<Parametres> {
                         title:Text("xyz@gmail.com",style:TextStyle(color: Colors.black.withAlpha(100),fontSize: 15),),
                         leading: Icon(
                           Icons.mail_outline,
+                          color: Colors.orange.withOpacity(0.8),
+                        ),
+                      ),
+                      ListTile(
+                        title:Text("Avenue montaigne, Paris, France",style:TextStyle(color: Colors.black.withAlpha(100),fontSize: 15),),
+                        leading: Icon(
+                          Icons.location_on,
                           color: Colors.orange.withOpacity(0.8),
                         ),
                       ),

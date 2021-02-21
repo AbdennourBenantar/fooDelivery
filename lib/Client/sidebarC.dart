@@ -2,11 +2,14 @@ import 'dart:async';
 import 'dart:ui';
 
 import 'package:barberdz/MenuItem.dart';
+import 'package:barberdz/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../bloc/bloc_navigation/navigation_bloc.dart';
+import '../config.dart';
 
 class SideBarC extends StatefulWidget {
   @override
@@ -61,8 +64,8 @@ class _SideBarCState extends State<SideBarC> with SingleTickerProviderStateMixin
                       children: <Widget>[
                         SizedBox(height: 100,),
                         ListTile(
-                          title: Text("Abdenour",style: TextStyle(color: Colors.white,fontSize: 25,fontWeight: FontWeight.w800),),
-                          subtitle: Text("xyz@gmail.com",style:TextStyle(color: Colors.white.withAlpha(100),fontSize: 15),),
+                          title: Text("El Dev",style: TextStyle(color: Colors.white,fontSize: 25,fontWeight: FontWeight.w800),),
+                          subtitle: Text("El Dev@elDev.com",style:TextStyle(color: Colors.white.withAlpha(100),fontSize: 15),),
                           leading: CircleAvatar(
                             child: Icon(
                               Icons.perm_identity,
@@ -81,7 +84,7 @@ class _SideBarCState extends State<SideBarC> with SingleTickerProviderStateMixin
                         ),
                         MenuItem(
                           icon: Icons.home,
-                          title: "Home",
+                          title: "Accueil",
                           onTap: (){
                             onIconPressed();
                             BlocProvider.of<ClientNavBloc>(context).add(ClientNavigationEvents.AccueilClickedEvent);
@@ -89,7 +92,7 @@ class _SideBarCState extends State<SideBarC> with SingleTickerProviderStateMixin
                         ),
                         MenuItem(
                           icon: Icons.shopping_cart,
-                          title: "My orders",
+                          title: "Mes commandes",
                           onTap: (){
                             onIconPressed();
                             BlocProvider.of<ClientNavBloc>(context).add(ClientNavigationEvents.MesCommandesClickedEvent);
@@ -105,19 +108,46 @@ class _SideBarCState extends State<SideBarC> with SingleTickerProviderStateMixin
                         ),
                         MenuItem(
                           icon: Icons.settings,
-                          title: "Settings",
+                          title: "Profil",
                           onTap: (){
                             onIconPressed();
                             BlocProvider.of<ClientNavBloc>(context).add(ClientNavigationEvents.ParametresClickedEvent);
                           },
                         ),
                         MenuItem(
+                          icon: Icons.support,
+                          title: "Support",
+                          onTap: (){
+                            onIconPressed();
+                            Utils.openEmail(
+                                toEmail: 'foodelivery2021@gmail.com',
+                                subject:'Votre sujet',
+                                body: 'Plus de détails ici + photo S.V.P'
+                            );
+                          },
+                        ),
+                        MenuItem(
                             icon: Icons.exit_to_app,
-                            title: "Logout",
-                            onTap:(){
-                              Navigator.pop(context);
+                            title: "Se déconnecter",
+                            onTap:() async {
+                              await Food.auth.signOut().then((value) {
+                                Navigator.pop(context);
+                              });
                             }
                         ),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Align(
+                              alignment: Alignment.bottomCenter,
+                              child: InkWell(
+                                onTap: (){},
+                                child: Text('CONDITIONS GENERALES DE VENTES',style: GoogleFonts.abel(color: Colors.white.withOpacity(0.5),fontSize: 12),),
+                              ),
+                            ),
+                          ),
+                        )
+
                       ],
                     ),
                   ),

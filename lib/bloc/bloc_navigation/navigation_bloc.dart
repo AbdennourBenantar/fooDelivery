@@ -1,4 +1,5 @@
 import 'package:barberdz/Client/accueil.dart';
+import 'package:barberdz/Client/accueilClient.dart';
 import 'package:barberdz/Client/clientLayout.dart';
 import 'package:barberdz/Client/mesCommandes.dart';
 import 'package:barberdz/Restaurant/restaurantDash.dart';
@@ -17,6 +18,7 @@ enum NavigationEvents{
 enum ClientNavigationEvents{
   ParametresClickedEvent,
   AccueilClickedEvent,
+  RestaurantClickedEvent,
   MesCommandesClickedEvent,
 }
 
@@ -43,16 +45,18 @@ class NavigationBloc extends Bloc<NavigationEvents,NavigationStates>{
 }
 
 class ClientNavBloc extends Bloc<ClientNavigationEvents,NavigationStates>{
-  NavigationStates get initialState => Accueil();
+  NavigationStates get initialState => AccueilClient();
 
   @override
   Stream<NavigationStates> mapEventToState(ClientNavigationEvents event) async*{
     switch(event){
-      case ClientNavigationEvents.AccueilClickedEvent: yield Accueil();
+      case ClientNavigationEvents.AccueilClickedEvent: yield AccueilClient();
       break;
       case ClientNavigationEvents.MesCommandesClickedEvent: yield Cart();
       break;
       case ClientNavigationEvents.ParametresClickedEvent: yield Parametres();
+      break;
+      case ClientNavigationEvents.RestaurantClickedEvent:yield Accueil() ;
       break;
     }
   }

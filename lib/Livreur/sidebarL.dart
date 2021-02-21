@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:ui';
 
 import 'package:barberdz/MenuItem.dart';
-import 'package:barberdz/config.dart';
 import 'package:barberdz/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,13 +9,15 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../bloc/bloc_navigation/navigation_bloc.dart';
+import '../config.dart';
+import 'bloc/livreurNav.dart';
 
-class SideBar extends StatefulWidget {
+class SideBarL extends StatefulWidget {
   @override
-  _SideBarState createState() => _SideBarState();
+  _SideBarLState createState() => _SideBarLState();
 }
 
-class _SideBarState extends State<SideBar> with SingleTickerProviderStateMixin<SideBar> {
+class _SideBarLState extends State<SideBarL> with SingleTickerProviderStateMixin<SideBarL> {
   AnimationController _animationController;
   StreamController<bool> isSidebarOpenedStreamController;
   Stream<bool> isSidebarOpenedStream;
@@ -47,26 +48,25 @@ class _SideBarState extends State<SideBar> with SingleTickerProviderStateMixin<S
       stream: isSidebarOpenedStream,
       builder: (context,isSidebarOpenedAsync){
         return AnimatedPositioned(
-        duration: _animationDuration,
-        top: 0,
-        bottom: 0,
-        left: isSidebarOpenedAsync.data? 0 : -screenWidth,
-        right: isSidebarOpenedAsync.data? 0 : screenWidth-40,
-        child: Row(
-        children: <Widget>[
-          Expanded(
+          duration: _animationDuration,
+          top: 0,
+          bottom: 0,
+          left: isSidebarOpenedAsync.data? 0 : -screenWidth,
+          right: isSidebarOpenedAsync.data? 0 : screenWidth-40,
+          child: Row(
+            children: <Widget>[
+              Expanded(
                 child: BackdropFilter(
                   filter: isSidebarOpenedAsync.data?ImageFilter.blur(sigmaY: 10,sigmaX: 10):ImageFilter.blur(sigmaY: 0,sigmaX: 0),
                   child: Container(
                     padding: EdgeInsets.symmetric(horizontal: 20),
                     color: Colors.black,
                     child: Column(
-                      mainAxisSize: MainAxisSize.max,
                       children: <Widget>[
                         SizedBox(height: 100,),
                         ListTile(
                           title: Text("El Dev",style: TextStyle(color: Colors.white,fontSize: 25,fontWeight: FontWeight.w800),),
-                          subtitle: Text("El Dev@eldev.com",style:TextStyle(color: Colors.white.withAlpha(100),fontSize: 15),),
+                          subtitle: Text("El Dev@elDev.com",style:TextStyle(color: Colors.white.withAlpha(100),fontSize: 15),),
                           leading: CircleAvatar(
                             child: Icon(
                               Icons.perm_identity,
@@ -84,29 +84,22 @@ class _SideBarState extends State<SideBar> with SingleTickerProviderStateMixin<S
                           endIndent: 32,
                         ),
                         MenuItem(
-                          icon: Icons.dashboard,
-                          title: "Tableau de bord",
+                          icon: Icons.home,
+                          title: "Accueil",
                           onTap: (){
                             onIconPressed();
-                            BlocProvider.of<NavigationBloc>(context).add(NavigationEvents.DashPageClickedEvent);
+                            BlocProvider.of<CoursierNavBloc>(context).add(CoursierNavEvents.AccueilClickedEvent);
                           },
                         ),
                         MenuItem(
-                          icon: Icons.add_shopping_cart,
-                          title: "Commandes",
+                          icon: Icons.motorcycle,
+                          title: "Courses",
                           onTap: (){
                             onIconPressed();
-                            BlocProvider.of<NavigationBloc>(context).add(NavigationEvents.CommandesClickedEvent);
+                            BlocProvider.of<CoursierNavBloc>(context).add(CoursierNavEvents.CommandesClickedEvent);
                           },
                         ),
-                        MenuItem(
-                          icon: Icons.fastfood,
-                          title: "Plats",
-                          onTap: (){
-                            onIconPressed();
-                            BlocProvider.of<NavigationBloc>(context).add(NavigationEvents.PlatsClickedEvent);
-                          },
-                        ),
+
                         Divider(
                           height: 64,
                           thickness: 0.5,
@@ -119,7 +112,7 @@ class _SideBarState extends State<SideBar> with SingleTickerProviderStateMixin<S
                           title: "Profil",
                           onTap: (){
                             onIconPressed();
-                            BlocProvider.of<NavigationBloc>(context).add(NavigationEvents.ParametresClickedEvent);
+                            BlocProvider.of<ClientNavBloc>(context).add(ClientNavigationEvents.ParametresClickedEvent);
                           },
                         ),
                         MenuItem(
@@ -134,15 +127,14 @@ class _SideBarState extends State<SideBar> with SingleTickerProviderStateMixin<S
                             );
                           },
                         ),
-
                         MenuItem(
-                          icon: Icons.exit_to_app,
-                          title: "Se déconnecter",
-                          onTap:() async {
-                            await Food.auth.signOut().then((value) {
-                              Navigator.pop(context);
-                            });
-                          }
+                            icon: Icons.exit_to_app,
+                            title: "Se déconnecter",
+                            onTap:() async {
+                              await Food.auth.signOut().then((value) {
+                                Navigator.pop(context);
+                              });
+                            }
                         ),
                         Expanded(
                           child: Padding(
@@ -156,38 +148,39 @@ class _SideBarState extends State<SideBar> with SingleTickerProviderStateMixin<S
                             ),
                           ),
                         )
+
                       ],
                     ),
                   ),
                 ),
               ),
-          Align(
-            alignment: Alignment(0,-0.9),
-            child: GestureDetector(
-              onTap: (){
-                onIconPressed();
-                },
-              child: ClipPath(
-                clipper: CustomMenuClipper(),
-                child: Container(
-                  width: 35,
-                  height: 120,
-                  color: Colors.black,
-                  alignment: Alignment.centerLeft,
-                  child: AnimatedIcon(
-                    progress: _animationController.view,
-                    icon: AnimatedIcons.menu_close,
-                    color: Colors.white,
-                    size: 25,
+              Align(
+                alignment: Alignment(0,-0.9),
+                child: GestureDetector(
+                  onTap: (){
+                    onIconPressed();
+                  },
+                  child: ClipPath(
+                    clipper: CustomMenuClipper(),
+                    child: Container(
+                      width: 35,
+                      height: 120,
+                      color: Colors.black,
+                      alignment: Alignment.centerLeft,
+                      child: AnimatedIcon(
+                        progress: _animationController.view,
+                        icon: AnimatedIcons.menu_close,
+                        color: Colors.white,
+                        size: 25,
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ),
-          )
-        ],
-        ),
+              )
+            ],
+          ),
         );
-        },
+      },
     );
   }
 

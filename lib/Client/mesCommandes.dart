@@ -38,7 +38,7 @@ class _CartState extends State<Cart> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Titlee(text: 'My cart',),
+                  Titlee(text: 'Mon panier',),
                 ],
               ),
               SizedBox(height: MediaQuery.of(context).size.height*0.04,width: MediaQuery.of(context).size.width,),
@@ -75,15 +75,15 @@ class _CartState extends State<Cart> {
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold
                                       ),),
-                                      Text("Quantity : x"+platCarted[index].x.toString(),style: GoogleFonts.abel(
+                                      Text("Quantité : x"+platCarted[index].x.toString(),style: GoogleFonts.abel(
                                           fontSize: 14,
                                           fontWeight: FontWeight.w100
                                       ),),
-                                      Text("Unity price: "+platCarted[index].price.toString()+" DA",style: GoogleFonts.abel(
+                                      Text("Prix: "+platCarted[index].price.toString()+" €",style: GoogleFonts.abel(
                                           fontSize: 14,
                                           fontWeight: FontWeight.w100
                                       ),),
-                                      Text("Total : "+(platCarted[index].x*platCarted[index].price).toString()+" DA",style: GoogleFonts.abel(
+                                      Text("Prix Total : "+(platCarted[index].x*platCarted[index].price).toString()+" €",style: GoogleFonts.abel(
                                           fontSize: 14,
                                           fontWeight: FontWeight.w100
                                       ),),
@@ -96,7 +96,7 @@ class _CartState extends State<Cart> {
                                           children: <Widget>[
                                             Icon(Icons.delete),
                                             SizedBox(width: MediaQuery.of(context).size.width*0.02,),
-                                            Text('Remove from cart',style: GoogleFonts.abel(fontSize: 14, fontWeight: FontWeight.w500),),
+                                            Text('Enlever du panier ',style: GoogleFonts.abel(fontSize: 14, fontWeight: FontWeight.w500),),
                                           ],
                                         ),
                                         shape: RoundedRectangleBorder(
@@ -139,7 +139,7 @@ class _CartState extends State<Cart> {
             Icon(Icons.arrow_upward,color: Colors.black,size: 20,),
             Padding(
               padding: const EdgeInsets.all(6.0),
-              child: Text('Swipe up to place your order',style: GoogleFonts.abel(color:Colors.black,fontSize: 14, fontWeight: FontWeight.w100),),
+              child: Text('Swipe up pour effectuer votre commande',style: GoogleFonts.abel(color:Colors.black,fontSize: 14, fontWeight: FontWeight.w100),),
             ),
             Container(
               decoration: BoxDecoration(
@@ -150,7 +150,7 @@ class _CartState extends State<Cart> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
                   Icon(Icons.shopping_basket,color: Colors.white,size: 30,),
-                  Text('Total to pay is : '+countTotal().toString()+" DA",style: GoogleFonts.abel(color:Colors.white,fontSize: 18, fontWeight: FontWeight.w500),),
+                  Text('Totale à payer est : '+countTotal().toString()+" €",style: GoogleFonts.abel(color:Colors.white,fontSize: 18, fontWeight: FontWeight.w500),),
                 ],
               ),
             ),

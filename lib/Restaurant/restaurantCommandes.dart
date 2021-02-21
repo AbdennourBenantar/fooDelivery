@@ -22,7 +22,7 @@ class _RestaurantCommandesState extends State<RestaurantCommandes> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               SizedBox(height: MediaQuery.of(context).size.height*0.07,width: MediaQuery.of(context).size.width,),
-              Titlee(text: 'Recieved Orders',),
+              Titlee(text: 'Commandes recues',),
               SizedBox(height: MediaQuery.of(context).size.height*0.01,width: MediaQuery.of(context).size.width,),
 
               Expanded(

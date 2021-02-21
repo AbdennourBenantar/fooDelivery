@@ -21,7 +21,7 @@ class _AssietteListState extends State<AssietteList> {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 8),
             child: Text(
-              'Our Dishes',
+              'Nos assietees',
               style: GoogleFonts.abel(color: Colors.black,
                   fontSize: 30,fontWeight: FontWeight.bold
               ),
@@ -150,7 +150,7 @@ class _ItemState extends State<Item> {
                     children: <Widget>[
                       SizedBox(
                         width: MediaQuery.of(context).size.width*0.22,
-                        child: Text((this.x*widget.plat.price.floor()).toString()+" DA",
+                        child: Text((this.x*widget.plat.price.floor()).toString()+" €",
                           style: GoogleFonts.abel(
                               fontSize: 14,
                               fontWeight: FontWeight.w100
